@@ -1,6 +1,7 @@
 # custom modification to default GitHub python .gitignore configuration
 data/
 tmp/
+private/
 .DS_Store
 .Spotlight-V100
 Thumbs.db
