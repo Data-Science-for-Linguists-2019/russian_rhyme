@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__name__ = 'lib'
 __author__ = 'David J. Birnbaum'
 __email__ = 'djbpitt@gmail.com'
 __version__ = '0.1'
