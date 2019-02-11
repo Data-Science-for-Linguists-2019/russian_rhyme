@@ -26,18 +26,24 @@ from xml.dom import pulldom
 import string
 import re
 import json
+import pkgutil
 
 # constants
-PUNC_REGEX = re.compile("[" + string.punctuation.replace("-", "") + "]+")  # strip all punc except hyphen
-OGO_RE = re.compile(r'([ео])г([ео])$', re.IGNORECASE)  # -ogo that needs to be changed to -ego
-OGO_EXCEPTIONS = {"немнОго", "мнОго", "стрОго", "убОго", "разлОго", "отлОго", "полОго"}  # exceptions to the above
-with open("lexical.json") as f:  # lexical exceptions (match: replace JSON objects)
-    tmp = json.load(f)
-ALL_LEXICAL_RE = re.compile("|".join(tmp.keys()))  # omnibus regex, keys are strings for this part
-LEXICAL_RE = {re.compile(key): value for key, value in tmp.items()}  # now make them regexes for lookup
+_PUNC_REGEX = re.compile("[" + string.punctuation.replace("-", "") + "]+")  # strip all punc except hyphen
+_OGO_RE = re.compile(r'([ео])г([ео])$', re.IGNORECASE)  # -ogo that needs to be changed to -ego
+_OGO_EXCEPTIONS = {"немнОго", "мнОго", "стрОго", "убОго", "разлОго", "отлОго", "полОго"}  # exceptions to the above
+_lexical_data = json.loads(pkgutil.get_data(__package__, 'lexical.json').decode('utf-8')) # needed to refer to file inside package
+# with open(_lexical_data) as f:  # lexical exceptions (match: replace JSON objects)
+#     tmp = json.load(f)
+_ALL_LEXICAL_RE = re.compile("|".join(_lexical_data.keys()))  # omnibus regex, keys are strings for this part
+_LEXICAL_RE = {re.compile(key): value for key, value in _lexical_data.items()}  # now make them regexes for lookup
 
 
-def flatten(line: str) -> str:
+def transliterate(word: str) -> str:
+    pass
+
+
+def _flatten(line: str) -> str:
     """Clean and flatten input
 
     Keyword argument:
@@ -61,10 +67,10 @@ def flatten(line: str) -> str:
                 result.append(node.data.upper())
             else:
                 result.append(node.data.lower())
-    return PUNC_REGEX.sub("", "".join(result))
+    return _PUNC_REGEX.sub("", "".join(result))
 
 
-def ogo(word: str) -> str:
+def _ogo(word: str) -> str:
     """Correct for -ого and lexical idiosyncrasies (e.g., солнце)
     
     Keyword argument:
@@ -78,14 +84,14 @@ def ogo(word: str) -> str:
     No more than one pattern can match, so no need to recurse over entire dictionary
     """
     # perform lexical substitutions
-    if ALL_LEXICAL_RE.search(word):  # check for any match to avoid checking all of them when not needed
-        for key in LEXICAL_RE.keys():  # there's a match, so find the right key
+    if _ALL_LEXICAL_RE.search(word):  # check for any match to avoid checking all of them when not needed
+        for key in _LEXICAL_RE.keys():  # there's a match, so find the right key
             if key.search(word):
-                word = key.sub(LEXICAL_RE[key], word)
+                word = key.sub(_LEXICAL_RE[key], word)
                 break
-    if word not in OGO_EXCEPTIONS:  # g -> v unless exception
+    if word not in _OGO_EXCEPTIONS:  # g -> v unless exception
         if word == "сегОдня":  # nonce exceptions
             word = "севОдня"
-        elif word not in OGO_EXCEPTIONS:
-            word = OGO_RE.sub(r'\1в\2', word)
+        elif word not in _OGO_EXCEPTIONS:
+            word = _OGO_RE.sub(r'\1в\2', word)
     return word
