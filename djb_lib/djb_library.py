@@ -18,7 +18,7 @@ Private functions:
     _regressive_voice() : voice obstruents, including /v/ (regressive)
     _palatal_assimilation() : palatalization (regressive)
     _consonant_cleanup() : c > ts, sč to šč, degeminate
-    _vowel_reducation() : unstressed non-high vowels are i after soft consonants and i < e, a < o after hard
+    _vowel_reduction() : unstressed non-high vowels are i after soft consonants and i < e, a < o after hard
     _strip_spaces() : remove all spaces
 """
 # imports
@@ -32,7 +32,8 @@ import pkgutil
 _PUNC_REGEX = re.compile("[" + string.punctuation.replace("-", "") + "]+")  # strip all punc except hyphen
 _OGO_RE = re.compile(r'([ео])г([ео])$', re.IGNORECASE)  # -ogo that needs to be changed to -ego
 _OGO_EXCEPTIONS = {"немнОго", "мнОго", "стрОго", "убОго", "разлОго", "отлОго", "полОго"}  # exceptions to the above
-_lexical_data = json.loads(pkgutil.get_data(__package__, 'lexical.json').decode('utf-8')) # needed to refer to file inside package
+_lexical_data = json.loads(
+    pkgutil.get_data(__package__, 'lexical.json').decode('utf-8'))  # needed to refer to file inside package
 # with open(_lexical_data) as f:  # lexical exceptions (match: replace JSON objects)
 #     tmp = json.load(f)
 _ALL_LEXICAL_RE = re.compile("|".join(_lexical_data.keys()))  # omnibus regex, keys are strings for this part
@@ -40,7 +41,7 @@ _LEXICAL_RE = {re.compile(key): value for key, value in _lexical_data.items()}  
 
 
 def transliterate(word: str) -> str:
-    pass
+    return word
 
 
 def _flatten(line: str) -> str:
