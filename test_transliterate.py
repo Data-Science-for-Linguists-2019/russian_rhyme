@@ -50,3 +50,17 @@ def test_flatten_punc_period():
 def test_flatten_punc_question():
     expected = "берег"
     assert_equal(djb_library._flatten("<line>берег?</line>"), expected)
+
+# _ogo()
+def test_ogo_mnogo():
+    expected = "мнОго"
+    assert_equal(djb_library._ogo("мнОго"), expected)
+def test_ogo_moego():
+    expected = "моевО"
+    assert_equal(djb_library._ogo("моегО"), expected)
+def test_ogo_segodnja():
+    expected = "севОдня"
+    assert_equal(djb_library._ogo("сегОдня"), expected)
+def test_ogo_konechno():
+    expected = "конЕшно"
+    assert_equal(djb_library._ogo("конЕчно"), expected)
