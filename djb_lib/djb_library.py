@@ -29,15 +29,13 @@ import json
 import pkgutil
 
 # constants
-_PUNC_REGEX = re.compile("[" + string.punctuation.replace("-", "") + "]+")  # strip all punc except hyphen
+_PUNC_RE = re.compile("[" + string.punctuation.replace("-", "") + "«»]+")  # strip all punc except hyphen
 _OGO_RE = re.compile(r'([ео])г([ео])$', re.IGNORECASE)  # -ogo that needs to be changed to -ego
 _OGO_EXCEPTIONS = {"немнОго", "мнОго", "стрОго", "убОго", "разлОго", "отлОго", "полОго"}  # exceptions to the above
 _lexical_data = json.loads(
     pkgutil.get_data(__package__, 'lexical.json').decode('utf-8'))  # needed to refer to file inside package
-# with open(_lexical_data) as f:  # lexical exceptions (match: replace JSON objects)
-#     tmp = json.load(f)
 _ALL_LEXICAL_RE = re.compile("|".join(_lexical_data.keys()))  # omnibus regex, keys are strings for this part
-_LEXICAL_RE = {re.compile(key): value for key, value in _lexical_data.items()}  # now make them regexes for lookup
+_LEXICAL_DICT = {re.compile(key): value for key, value in _lexical_data.items()}  # now make them regexes for lookup
 
 
 def transliterate(word: str) -> str:
@@ -68,7 +66,7 @@ def _flatten(line: str) -> str:
                 result.append(node.data.upper())
             else:
                 result.append(node.data.lower())
-    return _PUNC_REGEX.sub("", "".join(result))
+    return _PUNC_RE.sub("", "".join(result))
 
 
 def _ogo(word: str) -> str:
@@ -86,9 +84,9 @@ def _ogo(word: str) -> str:
     """
     # perform lexical substitutions
     if _ALL_LEXICAL_RE.search(word):  # check for any match to avoid checking all of them when not needed
-        for key in _LEXICAL_RE.keys():  # there's a match, so find the right key
+        for key in _LEXICAL_DICT.keys():  # there's a match, so find the right key
             if key.search(word):
-                word = key.sub(_LEXICAL_RE[key], word)
+                word = key.sub(_LEXICAL_DICT[key], word)
                 break
     if word not in _OGO_EXCEPTIONS:  # g -> v unless exception
         if word == "сегОдня":  # nonce exceptions
