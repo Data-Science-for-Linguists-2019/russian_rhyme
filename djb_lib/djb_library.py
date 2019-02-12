@@ -94,3 +94,57 @@ def _ogo(word: str) -> str:
         elif word not in _OGO_EXCEPTIONS:
             word = _OGO_RE.sub(r'\1в\2', word)
     return word
+
+
+def __proclitics():
+    pass
+
+
+def _enclitics():
+    pass
+
+
+def _tsa():
+    pass
+
+
+def _palatalize():
+    pass
+
+
+def _jot():
+    pass
+
+
+def _romanize():
+    pass
+
+
+def _final_devoice():
+    pass
+
+
+def _regressive_devoice():
+    pass
+
+
+def _regressive_voice():
+    pass
+
+
+def _palatal_assimilation():
+    pass
+
+
+def _consonant_cleanup():
+    pass
+
+
+def _vowel_reduction():
+    pass
+
+
+def _strip_spaces():
+    pass
+
+
