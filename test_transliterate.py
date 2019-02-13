@@ -90,3 +90,9 @@ def test_ogo_segodnja():
 def test_ogo_konechno():
     expected = "конЕшно"
     assert_equal(djb_library._ogo("конЕчно"), expected)
+
+
+# _proclitics()
+def test_proclitics_s():
+    expected = "мы смАмой"
+    assert_equal(djb_library._proclitics("мы с мАмой"), expected)

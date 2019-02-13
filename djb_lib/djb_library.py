@@ -29,6 +29,7 @@ import json
 import pkgutil
 
 # constants
+# TODO: use regex character class to strip non-letters instead of punctuation?
 _PUNC_RE = re.compile("[" + string.punctuation.replace("-", "") + "«»]+")  # strip all punc except hyphen
 _OGO_RE = re.compile(r'([ео])г([ео])$', re.IGNORECASE)  # -ogo that needs to be changed to -ego
 _OGO_EXCEPTIONS = {"немнОго", "мнОго", "стрОго", "убОго", "разлОго", "отлОго", "полОго"}  # exceptions to the above
@@ -96,8 +97,18 @@ def _ogo(word: str) -> str:
     return word
 
 
-def __proclitics():
-    pass
+def _proclitics(line: str) -> str:
+    proclitics = ["а", "без", "безо", "благодаря", "близ", "в", "вне", "во", "для", "до", "за", "и", "из", "из-за",
+                  "из-под", "изо", "или", "иль", "к", "ко", "меж", "на", "над", "надо", "не", "ни", "но", "о", "об",
+                  "обо", "от", "ото", "перед", "передо", "по", "по-за", "по-над", "по-под", "под", "подо", "пред",
+                  "предо", "при", "про", "с", "сквозь", "скрозь", "со", "среди", "средь", "у", "через", "чрез", ]
+    output_line = []
+    words = line.split()
+    for word in words:
+        output_line.append(word)
+        if word not in proclitics:
+            output_line.append(" ")
+    return "".join(output_line).rstrip()  # we added a spurious space after the last word
 
 
 def _enclitics():
@@ -146,5 +157,3 @@ def _vowel_reduction():
 
 def _strip_spaces():
     pass
-
-
