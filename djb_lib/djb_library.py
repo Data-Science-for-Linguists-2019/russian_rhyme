@@ -108,11 +108,18 @@ def _proclitics(line: str) -> str:
         output_line.append(word)
         if word not in proclitics:
             output_line.append(" ")
-    return "".join(output_line).rstrip()  # we added a spurious space after the last word
+    return "".join(output_line).strip()  # we added a spurious space after the last word
 
 
-def _enclitics():
-    pass
+def _enclitics(line: str) -> str:
+    enclitics = ["бо", "бы", "же", "ли"]
+    output_line = []
+    words = line.split()
+    for word in words:
+        if word not in enclitics:
+            output_line.append(" ")
+        output_line.append(word)
+    return "".join(output_line).strip()  # we added a spurious space before the first word
 
 
 def _tsa():

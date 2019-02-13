@@ -93,6 +93,17 @@ def test_ogo_konechno():
 
 
 # _proclitics()
-def test_proclitics_s():
+def test_proclitics_s_mamoj():
     expected = "мы смАмой"
     assert_equal(djb_library._proclitics("мы с мАмой"), expected)
+
+
+def test_proclitics_ne_s_mamoj():
+    expected = "что несмамой"
+    assert_equal(djb_library._proclitics("что не с мамой"), expected)
+
+
+# _enclitics()
+def test_enclitics_mog_by():
+    expected = "мОгбы"
+    assert_equal(djb_library._enclitics("мОг бы"), expected)
