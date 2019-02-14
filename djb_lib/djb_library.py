@@ -167,8 +167,12 @@ def _jot(line: str) -> str:
     return t2.translate(transtab)  # conflate softening vowels into regular ones, strip signs
 
 
-def _romanize():
-    pass
+# noinspection SpellCheckingInspection
+def _romanize(line: str) -> str:
+    """Romanize text"""
+    transtab = str.maketrans('абвгджзклмнопрстуфхцшыэАБВГДЖЗЙКЛМНОПРСТУФХЦЧШЩЫЭ',
+                             'abvgdžzklmnoprstufxcšieABVGDŽZJKLMNOPRSTUFXCČŠQIE')
+    return line.translate(transtab).replace("Щ", "ŠČ")  # only щ is not one-to-one
 
 
 def _final_devoice():

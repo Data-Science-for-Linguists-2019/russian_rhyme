@@ -150,3 +150,9 @@ def test_jot_initial():
 def test_jot_soft_sign():
     expected = "стаТЙА"
     assert_equal(djb_library._jot("стаТьЯ"), expected)
+
+
+# _romanize()
+def test_romanize_all():
+    expected = "abvgdžzklmnoprstufxcšie ABVGDŽZJKLMNOPRSTUFXCČŠQIE"
+    assert_equal(djb_library._romanize("абвгджзклмнопрстуфхцшыэ АБВГДЖЗЙКЛМНОПРСТУФХЦЧШЩЫЭ"), expected)
