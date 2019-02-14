@@ -107,3 +107,30 @@ def test_proclitics_ne_s_mamoj():
 def test_enclitics_mog_by():
     expected = "мОгбы"
     assert_equal(djb_library._enclitics("мОг бы"), expected)
+
+
+# _tsa()
+def test_tsa():
+    expected = "боротса боротса"
+    assert_equal(djb_library._tsa("бороться бороться"), expected)
+
+
+# _palatalize()
+def test_palatalize():
+    expected = "на БеРегУ пустЫнных вОлн"
+    assert_equal(djb_library._palatalize("на берегУ пустЫнных вОлн"), expected)
+
+
+def test_palatalize_all_front_vowels():
+    for v in "яеиёюЯЕИЁЮ":
+        assert_equal(djb_library._palatalize("б" + v), "Б" + v)
+
+
+def test_palatalize_all_back_vowels():
+    for v in "аэыоуАЭЫОУ":
+        assert_equal(djb_library._palatalize("б" + v), "б" + v)
+
+
+def test_palatalize_unpaired():
+    expected = "аЧаЙаЩаба"
+    assert_equal(djb_library._palatalize("ачайащаба"), expected)

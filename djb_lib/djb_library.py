@@ -37,6 +37,12 @@ _lexical_data = json.loads(
     pkgutil.get_data(__package__, 'lexical.json').decode('utf-8'))  # needed to refer to file inside package
 _ALL_LEXICAL_RE = re.compile("|".join(_lexical_data.keys()))  # omnibus regex, keys are strings for this part
 _LEXICAL_DICT = {re.compile(key): value for key, value in _lexical_data.items()}  # now make them regexes for lookup
+_TSA_RE = re.compile(r'ться\b')  # reflexive
+_PAL_RE = re.compile(r'([бвгдзклмнпрстфх])([яеиёюЯЕИЁЮь])')
+
+
+def process_match(m) -> str:  # call when _PAL_RE matches
+    return m.group(1).upper() + m.group(2)
 
 
 def transliterate(word: str) -> str:
@@ -122,12 +128,13 @@ def _enclitics(line: str) -> str:
     return "".join(output_line).strip()  # we added a spurious space before the first word
 
 
-def _tsa():
-    pass
+def _tsa(line: str) -> str:
+    return _TSA_RE.sub('тса', line)
 
 
-def _palatalize():
-    pass
+def _palatalize(line: str) -> str:
+    transtab = str.maketrans('чщй', 'ЧЩЙ')
+    return _PAL_RE.sub(process_match, line).translate(transtab)
 
 
 def _jot():
