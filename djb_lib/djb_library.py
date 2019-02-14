@@ -41,14 +41,17 @@ _TSA_RE = re.compile(r'ться\b')  # reflexive
 _PAL_RE = re.compile(r'([бвгдзклмнпрстфх])([яеиёюЯЕИЁЮь])')
 
 
-def process_match(m) -> str:  # call when _PAL_RE matches
+# functions called on compiled regexes
+def process_match_PAL_RE(m) -> str:  # call when _PAL_RE matches
     return m.group(1).upper() + m.group(2)
 
 
+# public function
 def transliterate(word: str) -> str:
     return word
 
 
+# private functions
 def _flatten(line: str) -> str:
     """Clean and flatten input
 
@@ -104,6 +107,7 @@ def _ogo(word: str) -> str:
 
 
 def _proclitics(line: str) -> str:
+    """Merge proclitics with bases"""
     proclitics = ["а", "без", "безо", "благодаря", "близ", "в", "вне", "во", "для", "до", "за", "и", "из", "из-за",
                   "из-под", "изо", "или", "иль", "к", "ко", "меж", "на", "над", "надо", "не", "ни", "но", "о", "об",
                   "обо", "от", "ото", "перед", "передо", "по", "по-за", "по-над", "по-под", "под", "подо", "пред",
@@ -118,6 +122,7 @@ def _proclitics(line: str) -> str:
 
 
 def _enclitics(line: str) -> str:
+    """Merge enclitics with bases"""
     enclitics = ["бо", "бы", "же", "ли"]
     output_line = []
     words = line.split()
@@ -129,16 +134,27 @@ def _enclitics(line: str) -> str:
 
 
 def _tsa(line: str) -> str:
+    """Convert ть?ся$ to тса"""
     return _TSA_RE.sub('тса', line)
 
 
 def _palatalize(line: str) -> str:
+    """Capitalize all palatalized consonants (including unpaired)"""
     transtab = str.maketrans('чщй', 'ЧЩЙ')
-    return _PAL_RE.sub(process_match, line).translate(transtab)
+    return _PAL_RE.sub(process_match_PAL_RE, line).translate(transtab)
 
 
 def _jot():
+    """Normalize /j/
+
+    Insert Й before softening vowels after vowels, hard or soft sign, and (except in anlaut) и
+    Convert softening vowels to non-softening
+    Strip hard and soft signs
+    """
+    # processes softening vowels after vowels and signs, but not in anlaut
     pass
+    # processes softening vowels except и in anlaut
+    # conflate softening vowels into regular ones and strip hard and soft signs
 
 
 def _romanize():
