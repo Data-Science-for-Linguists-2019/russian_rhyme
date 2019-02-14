@@ -147,6 +147,6 @@ def test_jot_initial():
     assert_equal(djb_library._jot("Я ЮныЙ"), expected)
 
 
-def test_jot_sign():
+def test_jot_soft_sign():
     expected = "стаТЙА"
     assert_equal(djb_library._jot("стаТьЯ"), expected)
