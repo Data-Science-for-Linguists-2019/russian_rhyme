@@ -38,12 +38,22 @@ _lexical_data = json.loads(
 _ALL_LEXICAL_RE = re.compile("|".join(_lexical_data.keys()))  # omnibus regex, keys are strings for this part
 _LEXICAL_DICT = {re.compile(key): value for key, value in _lexical_data.items()}  # now make them regexes for lookup
 _TSA_RE = re.compile(r'ться\b')  # reflexive
-_PAL_RE = re.compile(r'([бвгдзклмнпрстфх])([яеиёюЯЕИЁЮь])')
+_PAL_RE = re.compile(r'([бвгдзклмнпрстфх])([яеиёюЯЕИЁЮь])')  # C before softening V
+_INTERV_JOT_RE = re.compile(r'([аэыоуяеиёюАЭЫОУЯЕИЁЮьъ])([яеиёюЯЕИЁЮ])')  # V before jotated V
+_INITIAL_JOT_RE = re.compile(r'\b[яеёюЯЕЁЮ]')
 
 
 # functions called on compiled regexes
-def process_match_PAL_RE(m) -> str:  # call when _PAL_RE matches
+def _process_match_PAL_RE(m) -> str:  # call when _PAL_RE matches (C before softening V)
     return m.group(1).upper() + m.group(2)
+
+
+def _process_match_INTERV_JOT_RE(m) -> str:  # call when _INTERV_JOT_RE matches (VjV)
+    return m.group(1) + "Й" + m.group(2)
+
+
+def _process_match_INITIAL_JOT_RE(m) -> str:  # call when _INITIAL_JOT_RE matches (#jV)
+    return "Й" + m.group(0)
 
 
 # public function
@@ -141,20 +151,20 @@ def _tsa(line: str) -> str:
 def _palatalize(line: str) -> str:
     """Capitalize all palatalized consonants (including unpaired)"""
     transtab = str.maketrans('чщй', 'ЧЩЙ')
-    return _PAL_RE.sub(process_match_PAL_RE, line).translate(transtab)
+    return _PAL_RE.sub(_process_match_PAL_RE, line).translate(transtab)
 
 
-def _jot():
+def _jot(line: str) -> str:
     """Normalize /j/
 
     Insert Й before softening vowels after vowels, hard or soft sign, and (except in anlaut) и
     Convert softening vowels to non-softening
     Strip hard and soft signs
     """
-    # processes softening vowels after vowels and signs, but not in anlaut
-    pass
-    # processes softening vowels except и in anlaut
-    # conflate softening vowels into regular ones and strip hard and soft signs
+    transtab = str.maketrans('яеиёюЯЕИЁЮ', 'аэыоуАЭЫОУ', 'ьъ')
+    t1 = _INTERV_JOT_RE.sub(_process_match_INTERV_JOT_RE, line)  # VjV, ьjV
+    t2 = _INITIAL_JOT_RE.sub(_process_match_INITIAL_JOT_RE, t1)  # processes softening vowels except и in anlaut
+    return t2.translate(transtab)  # conflate softening vowels into regular ones, strip signs
 
 
 def _romanize():

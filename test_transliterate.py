@@ -134,3 +134,19 @@ def test_palatalize_all_back_vowels():
 def test_palatalize_unpaired():
     expected = "аЧаЙаЩаба"
     assert_equal(djb_library._palatalize("ачайащаба"), expected)
+
+
+# _jot()
+def test_jot_interv():
+    expected = "болшАЙа"
+    assert_equal(djb_library._jot("большАя"), expected)
+
+
+def test_jot_initial():
+    expected = "ЙА ЙУныЙ"
+    assert_equal(djb_library._jot("Я ЮныЙ"), expected)
+
+
+def test_jot_sign():
+    expected = "стаТЙА"
+    assert_equal(djb_library._jot("стаТьЯ"), expected)
