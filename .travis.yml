@@ -2,14 +2,4 @@ language: python
 version:
   - "3.7"
 install: "pip install nose"
-script: "nosetests -v --with-coverage --cover-package=cyr2phon --cover-tests cyr2phon/tests/test_transliterate.py"
-
-
-language: python
-python:
-  - "2.7"
-cache: pip
-install:
-  - pip install -r requirements.txt
-script:
-  - python tests.py
+script: "python setup.py develop && nosetests -w cyr2phon/tests/"
