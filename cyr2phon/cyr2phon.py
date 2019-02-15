@@ -33,7 +33,7 @@ import functools
 # TODO: use regex character class to strip non-letters instead of punctuation?
 _PUNC_RE = re.compile("[" + string.punctuation.replace("-", "") + "«»]+")  # strip all punc except hyphen
 
-# constants for _ogo()
+"""constants for _ogo()"""
 _OGO_RE = re.compile(r'([ео])г([ео])$', re.IGNORECASE)  # -ogo that needs to be changed to -ego
 _OGO_EXCEPTIONS = {"немнОго", "мнОго", "стрОго", "убОго", "разлОго", "отлОго", "полОго"}  # exceptions to the above
 _lexical_data = json.loads(
@@ -41,19 +41,19 @@ _lexical_data = json.loads(
 _ALL_LEXICAL_RE = re.compile("|".join(_lexical_data.keys()))  # omnibus regex, keys are strings for this part
 _LEXICAL_DICT = {re.compile(key): value for key, value in _lexical_data.items()}  # now make them regexes for lookup
 
-# constant for _proclitics()
+"""constant for _proclitics()"""
 _PROCLITICS = {"а", "без", "безо", "благодаря", "близ", "в", "вне", "во", "для", "до", "за", "и", "из", "из-за",
                "из-под", "изо", "или", "иль", "к", "ко", "меж", "на", "над", "надо", "не", "ни", "но", "о", "об",
                "обо", "от", "ото", "перед", "передо", "по", "по-за", "по-над", "по-под", "под", "подо", "пред",
                "предо", "при", "про", "с", "сквозь", "скрозь", "со", "среди", "средь", "у", "через", "чрез"}
 
-# constant for _enclitics()
+"""constant for _enclitics()"""
 _ENCLITICS = {"бо", "бы", "же", "ли"}
 
-# constant for _tsa()
+"""constant for _tsa()"""
 _TSA_RE = re.compile(r'ться\b')  # reflexive
 
-# constant and callback for _palatalize
+"""constant and callback for _palatalize"""
 _PAL_RE = re.compile(r'([бвгдзклмнпрстфх])([яеиёюЯЕИЁЮь])')  # C before softening V
 
 
@@ -61,7 +61,7 @@ def _process_match_PAL_RE(m) -> str:  # call when _PAL_RE matches (C before soft
     return m.group(1).upper() + m.group(2)
 
 
-# constants and callbacks for _jot()
+"""constants and callbacks for _jot()"""
 _INTERV_JOT_RE = re.compile(r'([аэыоуяеиёюАЭЫОУЯЕИЁЮьъ])([яеиёюЯЕИЁЮ])')  # V before jotated V
 _INITIAL_JOT_RE = re.compile(r'\b[яеёюЯЕЁЮ]')
 
@@ -74,7 +74,7 @@ def _process_match_INITIAL_JOT_RE(m) -> str:  # call when _INITIAL_JOT_RE matche
     return "Й" + m.group(0)
 
 
-# constant and callback for _final_devoice()
+"""constant and callback for _final_devoice()"""
 _FINAL_DEVOICE_RE = re.compile(r'[bvgdžzBVGDZ]\b')
 
 
