@@ -221,7 +221,7 @@ def _strip_spaces():
 
 
 # public function
-def transliterate(line: str) -> str:
+def transliterate(line: str) -> str:  # TODO: trap non-XML input
     """Transliterate input line
 
     Pipe input XML line through private function pipeline
