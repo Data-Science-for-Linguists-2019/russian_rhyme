@@ -3,3 +3,4 @@ python: 3.7
 dist: xenial
 sudo: true
 script: "nosetests -w cyr2phon/tests/"
+script: "nosetests -v --with-coverage --cover-package=cyr2phon --cover-tests cyr2phon/tests/"
