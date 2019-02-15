@@ -1,5 +1,5 @@
 """
-djb_library.py
+cyr2phon.py
 
 Public function:
     transliterate: pipeline of all private functions
