@@ -27,6 +27,7 @@ import string
 import re
 import json
 import pkgutil
+import functools
 
 # constants
 # TODO: use regex character class to strip non-letters instead of punctuation?
@@ -41,6 +42,7 @@ _TSA_RE = re.compile(r'ться\b')  # reflexive
 _PAL_RE = re.compile(r'([бвгдзклмнпрстфх])([яеиёюЯЕИЁЮь])')  # C before softening V
 _INTERV_JOT_RE = re.compile(r'([аэыоуяеиёюАЭЫОУЯЕИЁЮьъ])([яеиёюЯЕИЁЮ])')  # V before jotated V
 _INITIAL_JOT_RE = re.compile(r'\b[яеёюЯЕЁЮ]')
+_FINAL_DEVOICE_RE = re.compile(r'[bvgdžzBVGDZ]\b')
 
 
 # functions called on compiled regexes
@@ -56,9 +58,8 @@ def _process_match_INITIAL_JOT_RE(m) -> str:  # call when _INITIAL_JOT_RE matche
     return "Й" + m.group(0)
 
 
-# public function
-def transliterate(word: str) -> str:
-    return word
+def _process_match_FINAL_DEVOICE(m) -> str: # call when _FINAL_DEVOICE_RE matches (voiced obstruent in auslaut)
+    transtab = str.maketrans('bvgdžzBVGDZ', 'pfktšsPFKTS')
 
 
 # private functions
@@ -175,9 +176,9 @@ def _romanize(line: str) -> str:
     return line.translate(transtab).replace("Щ", "ŠČ")  # only щ is not one-to-one
 
 
-def _final_devoice():
-    pass
-
+# def _final_devoice(line: str) -->:
+#     """Devoice final obstruents"""
+#     _FINAL_VOICED_RE.sub(, line)
 
 def _regressive_devoice():
     pass
@@ -201,3 +202,27 @@ def _vowel_reduction():
 
 def _strip_spaces():
     pass
+
+
+# public function
+def transliterate(line: str) -> str:
+    """Transliterate input line
+
+    Pipe input XML line through private function pipeline
+    See: https://softwarejourneyman.com/python-function-pipelines.html
+    """
+    return functools.reduce(
+        lambda value, function: function(value),
+        (
+            _flatten,
+            _ogo,
+            _proclitics,
+            _enclitics,
+            _tsa,
+            _palatalize,
+            _jot,
+            _romanize,
+        ),
+        line,
+    )
+

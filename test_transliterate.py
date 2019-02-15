@@ -35,12 +35,13 @@ def test_lexical_data_members():
 
 
 # translate() TODO: placeholder functions
-def test_transliterate_1():
-    expected = "hi"
-    assert_equal(djb_library.transliterate("hi"), expected)
+def test_transliterate_line():
+    expected = "naBeRegU pustInnix vOln"
+    assert_equal(djb_library.transliterate("<line>На берег<stress>у</stress> пуст<stress>ы</stress>нных "
+                                           "в<stress>о</stress>лн</line>"), expected)
 
 
-def test_transliterate_2():
+def test_transliterate_empty():
     expected = ""
     assert_equal(djb_library.transliterate(""), expected)
 
