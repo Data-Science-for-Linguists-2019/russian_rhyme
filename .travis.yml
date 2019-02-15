@@ -1,4 +1,3 @@
 language: python
-version:
-  - "3.7"
+version: "3.7"
 script: "nosetests -w cyr2phon/tests/"
