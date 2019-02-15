@@ -7,5 +7,15 @@ David J. Birnbaum
 
 ## Files and directories
 
+### Code
+
+
+
+### Documentation
+
 * [project_plan.md](project_plan.md): Original project proposal
 * [degrees-of-rhyme.md](degrees-of-rhyme.md): Examples or types of imperfect rhyme, with discussion
+
+____
+
+**Acknowledgements:** Thanks to Na-Rae Han, Jevon Heath, and Daniel Zheng for comments and suggestions.
