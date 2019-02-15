@@ -58,8 +58,9 @@ def _process_match_INITIAL_JOT_RE(m) -> str:  # call when _INITIAL_JOT_RE matche
     return "Й" + m.group(0)
 
 
-def _process_match_FINAL_DEVOICE(m) -> str: # call when _FINAL_DEVOICE_RE matches (voiced obstruent in auslaut)
+def _process_match_FINAL_DEVOICE(m) -> str:  # call when _FINAL_DEVOICE_RE matches (voiced obstruent in auslaut)
     transtab = str.maketrans('bvgdžzBVGDZ', 'pfktšsPFKTS')
+    return ""  # TODO: Placeholder
 
 
 # private functions
@@ -119,10 +120,10 @@ def _ogo(word: str) -> str:
 
 def _proclitics(line: str) -> str:
     """Merge proclitics with bases"""
-    proclitics = ["а", "без", "безо", "благодаря", "близ", "в", "вне", "во", "для", "до", "за", "и", "из", "из-за",
+    proclitics = {"а", "без", "безо", "благодаря", "близ", "в", "вне", "во", "для", "до", "за", "и", "из", "из-за",
                   "из-под", "изо", "или", "иль", "к", "ко", "меж", "на", "над", "надо", "не", "ни", "но", "о", "об",
                   "обо", "от", "ото", "перед", "передо", "по", "по-за", "по-над", "по-под", "под", "подо", "пред",
-                  "предо", "при", "про", "с", "сквозь", "скрозь", "со", "среди", "средь", "у", "через", "чрез", ]
+                  "предо", "при", "про", "с", "сквозь", "скрозь", "со", "среди", "средь", "у", "через", "чрез"}
     output_line = []
     words = line.split()
     for word in words:
@@ -134,7 +135,7 @@ def _proclitics(line: str) -> str:
 
 def _enclitics(line: str) -> str:
     """Merge enclitics with bases"""
-    enclitics = ["бо", "бы", "же", "ли"]
+    enclitics = {"бо", "бы", "же", "ли"}
     output_line = []
     words = line.split()
     for word in words:
@@ -225,4 +226,3 @@ def transliterate(line: str) -> str:
         ),
         line,
     )
-
