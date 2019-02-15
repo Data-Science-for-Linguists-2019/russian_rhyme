@@ -2,7 +2,7 @@
 cyr2phon.py
 
 Public function:
-    transliterate: pipeline of all private functions
+    transliterate: pipeline of all private functions, in the order below
 
 Private functions:
     _flatten : convert XML <stress> tags to uppercase; normalize case, punctuation, white space
@@ -237,7 +237,7 @@ def transliterate(line: str) -> str:
             _tsa,
             _palatalize,
             _jot,
-            _romanize,
+            _romanize
         ),
         line,
     )
