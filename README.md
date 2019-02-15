@@ -9,7 +9,8 @@ David J. Birnbaum
 
 ### Code
 
-
+* _cyr2phon_: Cyrillic to phonetic library; exposes `cyr2phon.transliterate()`
+* _tests_: Unit tests for _cyr2phon_
 
 ### Documentation
 
