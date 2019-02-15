@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/Data-Science-for-Linguists-2019/russian_rhyme.svg?branch=master)](https://travis-ci.com/Data-Science-for-Linguists-2019/russian_rhyme)
+
 # Machine-assisted identification of rhyme in Russian verse
 
 David J. Birnbaum  
@@ -19,3 +21,4 @@ David J. Birnbaum
 ____
 
 **Acknowledgements:** Thanks to Na-Rae Han, Jevon Heath, and Daniel Zheng for comments and suggestions.
+
