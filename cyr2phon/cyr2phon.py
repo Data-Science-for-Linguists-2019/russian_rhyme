@@ -7,8 +7,8 @@ Public function:
 Private functions:
     _flatten : convert XML <stress> tags to uppercase; normalize case, punctuation, white space
     _ogo: ogo -> ego
-    _proclitics() : merge proclitics with bases
-    _enclitics() : merge enclitics with bases
+    _proclitics() : merge _PROCLITICS with bases
+    _enclitics() : merge _ENCLITICS with bases
     _tsa() : convert ть?ся$ to тса
     _palatalize() : capitalize all palatalized consonants (including unpaired)
     _jot() : normalize /j/, strip hard and soft signs
@@ -32,22 +32,38 @@ import functools
 # constants
 # TODO: use regex character class to strip non-letters instead of punctuation?
 _PUNC_RE = re.compile("[" + string.punctuation.replace("-", "") + "«»]+")  # strip all punc except hyphen
+
+# constants for _ogo()
 _OGO_RE = re.compile(r'([ео])г([ео])$', re.IGNORECASE)  # -ogo that needs to be changed to -ego
 _OGO_EXCEPTIONS = {"немнОго", "мнОго", "стрОго", "убОго", "разлОго", "отлОго", "полОго"}  # exceptions to the above
 _lexical_data = json.loads(
     pkgutil.get_data(__package__, 'lexical.json').decode('utf-8'))  # needed to refer to file inside package
 _ALL_LEXICAL_RE = re.compile("|".join(_lexical_data.keys()))  # omnibus regex, keys are strings for this part
 _LEXICAL_DICT = {re.compile(key): value for key, value in _lexical_data.items()}  # now make them regexes for lookup
+
+# constant for _proclitics()
+_PROCLITICS = {"а", "без", "безо", "благодаря", "близ", "в", "вне", "во", "для", "до", "за", "и", "из", "из-за",
+               "из-под", "изо", "или", "иль", "к", "ко", "меж", "на", "над", "надо", "не", "ни", "но", "о", "об",
+               "обо", "от", "ото", "перед", "передо", "по", "по-за", "по-над", "по-под", "под", "подо", "пред",
+               "предо", "при", "про", "с", "сквозь", "скрозь", "со", "среди", "средь", "у", "через", "чрез"}
+
+# constant for _enclitics()
+_ENCLITICS = {"бо", "бы", "же", "ли"}
+
+# constant for _tsa()
 _TSA_RE = re.compile(r'ться\b')  # reflexive
+
+# constant and callback for _palatalize
 _PAL_RE = re.compile(r'([бвгдзклмнпрстфх])([яеиёюЯЕИЁЮь])')  # C before softening V
-_INTERV_JOT_RE = re.compile(r'([аэыоуяеиёюАЭЫОУЯЕИЁЮьъ])([яеиёюЯЕИЁЮ])')  # V before jotated V
-_INITIAL_JOT_RE = re.compile(r'\b[яеёюЯЕЁЮ]')
-_FINAL_DEVOICE_RE = re.compile(r'[bvgdžzBVGDZ]\b')
 
 
-# functions called on compiled regexes
 def _process_match_PAL_RE(m) -> str:  # call when _PAL_RE matches (C before softening V)
     return m.group(1).upper() + m.group(2)
+
+
+# constants and callbacks for _jot()
+_INTERV_JOT_RE = re.compile(r'([аэыоуяеиёюАЭЫОУЯЕИЁЮьъ])([яеиёюЯЕИЁЮ])')  # V before jotated V
+_INITIAL_JOT_RE = re.compile(r'\b[яеёюЯЕЁЮ]')
 
 
 def _process_match_INTERV_JOT_RE(m) -> str:  # call when _INTERV_JOT_RE matches (VjV)
@@ -56,6 +72,10 @@ def _process_match_INTERV_JOT_RE(m) -> str:  # call when _INTERV_JOT_RE matches 
 
 def _process_match_INITIAL_JOT_RE(m) -> str:  # call when _INITIAL_JOT_RE matches (#jV)
     return "Й" + m.group(0)
+
+
+# constant and callback for _final_devoice()
+_FINAL_DEVOICE_RE = re.compile(r'[bvgdžzBVGDZ]\b')
 
 
 def _process_match_FINAL_DEVOICE(m) -> str:  # call when _FINAL_DEVOICE_RE matches (voiced obstruent in auslaut)
@@ -119,27 +139,22 @@ def _ogo(word: str) -> str:
 
 
 def _proclitics(line: str) -> str:
-    """Merge proclitics with bases"""
-    proclitics = {"а", "без", "безо", "благодаря", "близ", "в", "вне", "во", "для", "до", "за", "и", "из", "из-за",
-                  "из-под", "изо", "или", "иль", "к", "ко", "меж", "на", "над", "надо", "не", "ни", "но", "о", "об",
-                  "обо", "от", "ото", "перед", "передо", "по", "по-за", "по-над", "по-под", "под", "подо", "пред",
-                  "предо", "при", "про", "с", "сквозь", "скрозь", "со", "среди", "средь", "у", "через", "чрез"}
+    """Merge _PROCLITICS with bases"""
     output_line = []
     words = line.split()
     for word in words:
         output_line.append(word)
-        if word not in proclitics:
+        if word not in _PROCLITICS:
             output_line.append(" ")
     return "".join(output_line).strip()  # we added a spurious space after the last word
 
 
 def _enclitics(line: str) -> str:
-    """Merge enclitics with bases"""
-    enclitics = {"бо", "бы", "же", "ли"}
+    """Merge _ENCLITICS with bases"""
     output_line = []
     words = line.split()
     for word in words:
-        if word not in enclitics:
+        if word not in _ENCLITICS:
             output_line.append(" ")
         output_line.append(word)
     return "".join(output_line).strip()  # we added a spurious space before the first word
