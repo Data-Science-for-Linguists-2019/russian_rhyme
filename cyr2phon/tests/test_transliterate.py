@@ -34,13 +34,6 @@ def test_lexical_data_members():
         assert_in(re.compile(item), cyr2phon._LEXICAL_DICT.keys())
 
 
-# translate() TODO: placeholder functions
-def test_transliterate_line():
-    expected = "naBeRegU pustInnix vOln"
-    assert_equal(cyr2phon.transliterate("<line>На берег<stress>у</stress> пуст<stress>ы</stress>нных "
-                                           "в<stress>о</stress>лн</line>"), expected)
-
-
 def test_transliterate_empty():
     expected = ""
     assert_equal(cyr2phon.transliterate(""), expected)
@@ -157,3 +150,11 @@ def test_jot_soft_sign():
 def test_romanize_all():
     expected = "abvgdžzklmnoprstufxcšie ABVGDŽZJKLMNOPRSTUFXCČŠQIE"
     assert_equal(cyr2phon._romanize("абвгджзклмнопрстуфхцшыэ АБВГДЖЗЙКЛМНОПРСТУФХЦЧШЩЫЭ"), expected)
+
+
+# translate() TODO: placeholder functions
+# This is really an integration test, since transliterate() calls all other functions
+def test_transliterate_line():
+    expected = "naBeRegU pustInnix vOln"
+    assert_equal(cyr2phon.transliterate("<line>На берег<stress>у</stress> пуст<stress>ы</stress>нных "
+                                        "в<stress>о</stress>лн</line>"), expected)
