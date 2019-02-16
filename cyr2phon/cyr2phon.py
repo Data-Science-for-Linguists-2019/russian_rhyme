@@ -121,7 +121,7 @@ def _ogo(word: str) -> str:
         (ne)?mnogo, strogo, ubogo, razlogo, otlogo, pologo, segodnja
     Č > š: что(бы)?, конечн.*, нарочн.*, очечник.*, прачечн.*, скучно, яичниц.*, ильиничн.*, саввичн.*, никитичн.*
     Idiosyncrasies: solnc.*, zdravstvuj.*, čuvstv*, zvezdn.*, landšaft.*, pozdno, prazdnik.*, serdc.*, grustn.*,
-        izvestn.*, lestn.*, mestn.*, okrestnost.*, častn.*, sčastliv.*
+        izvestn.*, lestn.*, mestn.*, okrestnost.*, častn.*, sčastliv.*; also segodnja
     No more than one pattern can match, so no need to recurse over entire dictionary
     """
     # perform lexical substitutions
@@ -131,10 +131,7 @@ def _ogo(word: str) -> str:
                 word = key.sub(_LEXICAL_DICT[key], word)
                 break
     if word not in _OGO_EXCEPTIONS:  # g -> v unless exception
-        if word == "сегОдня":  # nonce exceptions
-            word = "севОдня"
-        elif word not in _OGO_EXCEPTIONS:
-            word = _OGO_RE.sub(r'\1в\2', word)
+        word = _OGO_RE.sub(r'\1в\2', word)
     return word
 
 
