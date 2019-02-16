@@ -101,9 +101,9 @@ def _flatten(line: str) -> str:
     for event, node in doc:
         if event == pulldom.START_ELEMENT and node.localName == 'stress':
             in_stress = 1
-        if event == pulldom.END_ELEMENT and node.localName == 'stress':
+        elif event == pulldom.END_ELEMENT and node.localName == 'stress':
             in_stress = 0
-        if event == pulldom.CHARACTERS:
+        elif event == pulldom.CHARACTERS:
             if in_stress:
                 result.append(node.data.upper())
             else:
