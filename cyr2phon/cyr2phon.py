@@ -29,7 +29,6 @@ import json
 import pkgutil
 import functools
 
-
 _XML_RE = re.compile(r"<line>.*</line>")
 # TODO: move transtab assignments out of function declarations
 # constants
@@ -40,15 +39,16 @@ _PUNC_RE = re.compile("[" + string.punctuation.replace("-", "") + "«»]+")  # s
 _lexical_data = json.loads(
     pkgutil.get_data(__package__, 'lexical.json').decode('utf-8'))  # needed to refer to file inside package
 # _ALL_LEXICAL_RE = re.compile("|".join(_lexical_data.keys()))  # omnibus regex, keys are strings for this part
-_LEXICAL_DICT = {re.compile(r"\b" + key): value for key, value in _lexical_data.items()}  # now make them regexes for lookup
+_LEXICAL_DICT = {re.compile(r"\b" + key): value for key, value in _lexical_data.items()}  # regexes for lookup
 
 """constants and callback for _ogo()"""
 _OGO_RE = re.compile(r'([ео])г([ео])\b', re.IGNORECASE)  # -ogo that needs to be changed to -ego
 _OGO_EXCEPTIONS = {"немнОго", "мнОго", "стрОго", "убОго", "разлОго", "отлОго", "полОго"}  # exceptions to the above
 
 
-def _process_match_OGO_RE(m) -> str: # call when _OGO_RE matches (-ogo)
+def _process_match_OGO_RE(m) -> str:  # call when _OGO_RE matches (-ogo)
     return m.group(1) + "в" + m.group(2)
+
 
 """constant for _proclitics()"""
 _PROCLITICS = {"а", "без", "безо", "благодаря", "близ", "в", "вне", "во", "для", "до", "за", "и", "из", "из-за",
@@ -120,14 +120,15 @@ def _flatten(line: str) -> str:
                     result.append(node.data.lower())
         return _PUNC_RE.sub("", "".join(result))
     else:
-        raise Exception (line, "is not tagged correctly")
+        raise Exception(line, "is not tagged correctly")
+
 
 def _lexical(line: str) -> str:
     """Adjust for lexical idiosyncrasies (e.g., солнце)
 
     Č > š: ильиничн.*, конечн.*, нарочн.*, никитичн.*, очечник.*, прачечн.*, саввичн.*, скучн.*, яичниц.*
-    Idiosyncrasies: grustn.*, zvezdn.*, zdravstvuj.*, izvestn.*, landšaft.*, lestn.*, mestn.*, okrestn.*, pozdn.*, prazdn.*,
-        segodnja, serdc.*, solnc.*, sčastliv.*, častn.*, čto.*, čtO.*, čuvstv.*
+    Idiosyncrasies: grustn.*, zvezdn.*, zdravstvuj.*, izvestn.*, landšaft.*, lestn.*, mestn.*, okrestn.*, pozdn.*,
+    prazdn.*, segodnja, serdc.*, solnc.*, sčastliv.*, častn.*, čto.*, čtO.*, čuvstv.*
     """
     for key in _LEXICAL_DICT.keys():
         line = key.sub(_LEXICAL_DICT[key], line)
