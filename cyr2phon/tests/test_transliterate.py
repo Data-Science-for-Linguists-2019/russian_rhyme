@@ -45,8 +45,13 @@ def test_flatten_empty():
     assert_raises(Exception, cyr2phon._flatten, "")
 
 
-def test_flatten_bad_xml():
+def test_flatten_xml_bad_root():
     assert_raises(Exception, cyr2phon._flatten, "<stuff>Hi, Mom!</stuff>")
+
+
+def test_flatten_xml_bad_element():
+    assert_raises(Exception, cyr2phon._flatten,
+                  "<line>На берег<stress>у</stress> пуст<stress>ы</stress>нных в<stuff>о</stuff>лн</line>")
 
 
 def test_flatten_stress():
@@ -249,7 +254,7 @@ def test_transliterate_devoice():
     expected = "nAšixČUstfglubOKix"
     assert_equal(
         cyr2phon.transliterate("<line>Н<stress>а</stress>ших ч<stress>у</stress>вств глуб<stress>о</stress>ких</line>"),
-    expected)
+        expected)
 
 
 def test_transliterate_regressive_palatalization():
@@ -261,4 +266,3 @@ def test_transliterate_line():
     expected = "naBiRigUpustInixvOln"
     assert_equal(cyr2phon.transliterate("<line>На берег<stress>у</stress> пуст<stress>ы</stress>нных "
                                         "в<stress>о</stress>лн</line>"), expected)
-

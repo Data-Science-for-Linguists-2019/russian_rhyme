@@ -30,8 +30,11 @@ import json
 import pkgutil
 import functools
 
-"""constants for _flatten()"""
-_XML_RE = re.compile(r"<line>.*</line>")  # TODO: check for balanced <stress> tags
+"""constants for _flatten()
+
+<line> root, balanced <stress>, no other markup
+"""
+_XML_RE = re.compile(r"<line>(<stress>[аэыоуАЭЫОУяеиёюЯЕИЁЮ]</stress>|[^<>]+)+</line>")
 # TODO: use regex character class to strip non-letters instead of punctuation?
 # TODO: parameterize where possible
 _PUNC_RE = re.compile("[" + string.punctuation.replace("-", "") + "«»]+")  # strip all punc except hyphen
@@ -99,10 +102,11 @@ def _process_match_FINAL_DEVOICE(m) -> str:  # call when _FINAL_DEVOICE_RE match
 
 
 """constants and callback for _regressive_devoice()"""
-_REGRESSIVE_DEVOICE_RE = re.compile(r'([bvgdžzBVGDZpfktšsPFKTSkcČ]+)([pfktšsPFKTSkcČ])')
+_REGRESSIVE_DEVOICE_RE = re.compile(r'([bvgdžzBVGDZpfktšsPFKTScČ]+)([pfktšsPFKTScČ])')
 _REGRESSIVE_DEVOICE_TRANSTAB = str.maketrans('bvgdžzBVGDZ', 'pfktšsPFKTS')
 
-def _process_match_REGRESSIVE_DEVOICE(m) -> str: # call when _REGRESSIVE_DEVOICE_RE matches (voiced/_voiceless)
+
+def _process_match_REGRESSIVE_DEVOICE(m) -> str:  # call when _REGRESSIVE_DEVOICE_RE matches (voiced/_voiceless)
     return m.group(1).translate(_REGRESSIVE_DEVOICE_TRANSTAB) + m.group(2)
 
 
