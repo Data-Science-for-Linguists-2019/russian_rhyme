@@ -210,6 +210,16 @@ def test_regressive_voice_sdelat():
     assert_equal(cyr2phon._regressive_voice("sDElaT"), expected)
 
 
+def test_regressive_palatalization_sdelat():
+    expected = "SDElaT"
+    assert_equal(cyr2phon._regressive_palatalization("sDElaT"), expected)
+
+
+def test_regressive_palatalization_schastie():
+    expected = "SČASTiJe"
+    assert_equal(cyr2phon._regressive_palatalization("sČAsTiJe"), expected)
+
+
 # translate()
 # These are really integration tests, since transliterate() calls all other functions
 def test_transliterate_lexical_ogo():
@@ -219,7 +229,7 @@ def test_transliterate_lexical_ogo():
 
 
 def test_transliterate_enclitic_final_devoice():
-    expected = "bOgbi prosTIl"
+    expected = "bOgbi proSTIl"
     assert_equal(cyr2phon.transliterate("<line>Б<stress>о</stress>г бы прост<stress>и</stress>л</line>"), expected)
 
 
@@ -228,6 +238,11 @@ def test_transliterate_devoice():
     assert_equal(
         cyr2phon.transliterate("<line>Н<stress>а</stress>ших ч<stress>у</stress>вств глуб<stress>о</stress>ких</line>"),
     expected)
+
+
+def test_transliterate_regressive_palatalization():
+    expected = "snOvim SČASTJem"
+    assert_equal(cyr2phon.transliterate("<line>С н<stress>о</stress>вым сч<stress>а</stress>стьем!</line>"), expected)
 
 
 def test_transliterate_line():

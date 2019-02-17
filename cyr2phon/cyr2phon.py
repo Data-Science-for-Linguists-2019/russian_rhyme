@@ -31,7 +31,7 @@ import pkgutil
 import functools
 
 """constants for _flatten()"""
-_XML_RE = re.compile(r"<line>.*</line>")
+_XML_RE = re.compile(r"<line>.*</line>")  # TODO: check for balanced <stress> tags
 # TODO: use regex character class to strip non-letters instead of punctuation?
 _PUNC_RE = re.compile("[" + string.punctuation.replace("-", "") + "«»]+")  # strip all punc except hyphen
 
@@ -115,8 +115,20 @@ _REGRESSIVE_VOICE_RE = re.compile(r'([bvgdžzBVGDZpfktšsPFKTSxcČ]+)([bgdžzBGD
 _REGRESSIVE_VOICE_TRANSTAB = str.maketrans('pfktšsPFKTSxcČ', 'bvgdžzBVGDZɣʒǮ')
 
 
-def _process_match_REGRESSIVE_VOICE(m) -> str:  # call when REGRESSIVE_VOICE_RE matches (voiceless/_voiced)
+def _process_match_REGRESSIVE_VOICE(m) -> str:  # call when _REGRESSIVE_VOICE_RE matches (voiceless/_voiced)
     return m.group(1).translate(_REGRESSIVE_VOICE_TRANSTAB) + m.group(2)
+
+
+"""constant and callback for _regressive_palatalization
+
+call when _REGRESSIVE_PALATALIZATION_RE matches
+ŠČ has already been split, so requires special treatment
+"""
+_REGRESSIVE_PALATALIZATION_RE = re.compile(r'[tdnszTDNSZČLJ]+[TDNSZČLJ]|ŠČ')
+
+
+def _process_match_REGRESSIVE_PALATALIZATION(m) -> str:
+    return m.group(0).upper()
 
 
 # private functions
@@ -246,8 +258,9 @@ def _regressive_voice(line: str) -> str:
     return _REGRESSIVE_VOICE_RE.sub(_process_match_REGRESSIVE_VOICE, line)
 
 
-def _palatal_assimilation(line: str) -> str:
-    pass
+def _regressive_palatalization(line: str) -> str:
+    """Regressive palatalization assimilation"""
+    return _REGRESSIVE_PALATALIZATION_RE.sub(_process_match_REGRESSIVE_PALATALIZATION, line)
 
 
 def _consonant_cleanup(line: str) -> str:
@@ -291,6 +304,7 @@ def transliterate(line: str) -> str:
             _final_devoice,
             _regressive_devoice,
             _regressive_voice,
+            _regressive_palatalization
         ),
         line,
     )
