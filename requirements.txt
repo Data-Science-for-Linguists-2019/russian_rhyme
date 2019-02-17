@@ -1,3 +1,4 @@
 nose
 codecov
 coverage
+regex
