@@ -24,8 +24,7 @@ Private functions:
 """
 # imports
 from xml.dom import pulldom
-import string
-import re
+import regex as re
 import json
 import pkgutil
 import functools
@@ -37,7 +36,8 @@ import functools
 _XML_RE = re.compile(r"<line>(<stress>[аэыоуАЭЫОУяеиёюЯЕИЁЮ]</stress>|[^<>]+)+</line>")
 # TODO: use regex character class to strip non-letters instead of punctuation?
 # TODO: parameterize where possible
-_PUNC_RE = re.compile("[" + string.punctuation.replace("-", "") + "«»]+")  # strip all punc except hyphen
+# _PUNC_RE = re.compile("[" + string.punctuation.replace("-", "") + "«»]+")  # strip all punc except hyphen
+_PUNC_RE = re.compile(r'(?V1)[\p{P}\p{S}--[-]]')
 
 """constants for _lexical()"""
 _lexical_data = json.loads(

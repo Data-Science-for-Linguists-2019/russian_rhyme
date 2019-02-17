@@ -1,4 +1,4 @@
-import re
+import regex as re
 from nose.tools import *
 
 from cyr2phon import cyr2phon
@@ -12,8 +12,8 @@ key_set = {r"\b" + item for item in {"ильИничн", "здрАвствуй",
 
 # constants
 def test_PUNC_RE():
-    expected = re.compile("[" + '!"#$%&\'()*+,./:;<=>?@[\\]^_`{|}~«»' + "]+")
-    assert_equal(cyr2phon._PUNC_RE, expected)
+    expected = "lin-e"
+    assert_equal(cyr2phon._PUNC_RE.sub("", '+l,i.n-e«'), expected)
 
 
 def test_OGO_RE():
