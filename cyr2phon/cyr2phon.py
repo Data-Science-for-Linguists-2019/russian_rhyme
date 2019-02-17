@@ -34,10 +34,8 @@ import functools
 <line> root, balanced <stress>, no other markup
 """
 _XML_RE = re.compile(r"<line>(<stress>[аэыоуАЭЫОУяеиёюЯЕИЁЮ]</stress>|[^<>]+)+</line>")
-# TODO: use regex character class to strip non-letters instead of punctuation?
 # TODO: parameterize where possible
-# _PUNC_RE = re.compile("[" + string.punctuation.replace("-", "") + "«»]+")  # strip all punc except hyphen
-_PUNC_RE = re.compile(r'(?V1)[\p{P}\p{S}--[-]]')
+_PUNC_RE = re.compile(r'(?V1)[\p{P}\p{S}--[-]]')  # strip all punc except hyphen
 
 """constants for _lexical()"""
 _lexical_data = json.loads(
