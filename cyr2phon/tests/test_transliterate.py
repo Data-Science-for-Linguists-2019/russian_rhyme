@@ -3,9 +3,10 @@ from nose.tools import *
 import re
 
 # test suite constants
-key_set = {"ильИничн", "здрАвствуй", "лЕстн", "мЕстн", "очЕчник", "^чтО", "^что", "никИтичн", "скУчно$", "грУстн",
-           "нарОчн", "счАстлив", "окрЕстн", "яИчниц", "ландшАфт", "конЕчн", "прАздник", "чАстн", "прАчечн", "звЁздн",
-           "извЕстн", "чУвств", "пОздно", "сЕрдц", "сАввичн", "сегОдня"}
+key_set = {r"\b" + item for item in {"ильИничн", "здрАвствуй", "лЕстн", "мЕстн", "очЕчник", "чтО", "что", "никИтичн",
+                                    "скУчн", "грУстн", "нарОчн", "счАстлив", "окрЕстн", "яИчниц", "ландшАфт",
+                                    "конЕчн", "прАздн", "чАстн", "прАчечн", "звЁздн", "извЕстн", "чУвств", "пОздн",
+                                    "сЕрдц", "сАввичн", "сегОдня", "сОлнц"}}
 
 
 # constants
@@ -34,11 +35,6 @@ def test_lexical_data_members():
         assert_in(re.compile(item), cyr2phon._LEXICAL_DICT.keys())
 
 
-def test_transliterate_empty():
-    expected = ""
-    assert_equal(cyr2phon.transliterate(""), expected)
-
-
 # _flatten()
 def test_flatten_stress():
     expected = "бЕрег"
@@ -65,6 +61,22 @@ def test_flatten_punc_question():
     assert_equal(cyr2phon._flatten("<line>берег?</line>"), expected)
 
 
+# lexical
+def test_lexical_zdrav_alone():
+    expected = "здрАствуйте"
+    assert_equal(cyr2phon._lexical("здрАвствуйте"), expected)
+
+
+def test_lexical_zdrav_context():
+    expected = "Ах здрАствуй дрУг"
+    assert_equal(cyr2phon._lexical("Ах здрАвствуй дрУг"), expected)
+
+
+def test_lexical_multiple():
+    expected = "здрАствуйте от нАшего грУсного дрУга"
+    assert_equal(cyr2phon._lexical("здрАвствуйте от нАшего грУстного дрУга"), expected)
+
+
 # _ogo()
 def test_ogo_mnogo():
     expected = "мнОго"
@@ -78,12 +90,12 @@ def test_ogo_moego():
 
 def test_ogo_segodnja():
     expected = "севОдня"
-    assert_equal(cyr2phon._ogo("сегОдня"), expected)
+    assert_equal(cyr2phon._lexical("сегОдня"), expected)
 
 
 def test_ogo_konechno():
     expected = "конЕшно"
-    assert_equal(cyr2phon._ogo("конЕчно"), expected)
+    assert_equal(cyr2phon._lexical("конЕчно"), expected)
 
 
 # _proclitics()
@@ -152,9 +164,22 @@ def test_romanize_all():
     assert_equal(cyr2phon._romanize("абвгджзклмнопрстуфхцшыэ АБВГДЖЗЙКЛМНОПРСТУФХЦЧШЩЫЭ"), expected)
 
 
-# translate() TODO: placeholder functions
-# This is really an integration test, since transliterate() calls all other functions
+# translate()
+# These are really integration tests, since transliterate() calls all other functions
+def test_transliterate_lexical_ogo():
+    expected = "zdrAstvuJTe otnAševo grUsnovo drUga"
+    assert_equal(cyr2phon.transliterate("<line>Здр<stress>а</stress>вствуйте от н<stress>а</stress>шего "
+                                        "гр<stress>у</stress>стного др<stress>у</stress>га!</line>"), expected)
+
+
 def test_transliterate_line():
     expected = "naBeRegU pustInnix vOln"
     assert_equal(cyr2phon.transliterate("<line>На берег<stress>у</stress> пуст<stress>ы</stress>нных "
                                         "в<stress>о</stress>лн</line>"), expected)
+
+
+def test_transliterate_empty():
+    expected = ""
+    assert_equal(cyr2phon.transliterate(""), expected)
+
+

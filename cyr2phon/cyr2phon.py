@@ -34,13 +34,19 @@ import functools
 # TODO: use regex character class to strip non-letters instead of punctuation?
 _PUNC_RE = re.compile("[" + string.punctuation.replace("-", "") + "«»]+")  # strip all punc except hyphen
 
-"""constants for _ogo()"""
-_OGO_RE = re.compile(r'([ео])г([ео])$', re.IGNORECASE)  # -ogo that needs to be changed to -ego
-_OGO_EXCEPTIONS = {"немнОго", "мнОго", "стрОго", "убОго", "разлОго", "отлОго", "полОго"}  # exceptions to the above
+"""constants for _lexical()"""
 _lexical_data = json.loads(
     pkgutil.get_data(__package__, 'lexical.json').decode('utf-8'))  # needed to refer to file inside package
-_ALL_LEXICAL_RE = re.compile("|".join(_lexical_data.keys()))  # omnibus regex, keys are strings for this part
-_LEXICAL_DICT = {re.compile(key): value for key, value in _lexical_data.items()}  # now make them regexes for lookup
+# _ALL_LEXICAL_RE = re.compile("|".join(_lexical_data.keys()))  # omnibus regex, keys are strings for this part
+_LEXICAL_DICT = {re.compile(r"\b" + key): value for key, value in _lexical_data.items()}  # now make them regexes for lookup
+
+"""constants and callback for _ogo()"""
+_OGO_RE = re.compile(r'([ео])г([ео])\b', re.IGNORECASE)  # -ogo that needs to be changed to -ego
+_OGO_EXCEPTIONS = {"немнОго", "мнОго", "стрОго", "убОго", "разлОго", "отлОго", "полОго"}  # exceptions to the above
+
+
+def _process_match_OGO_RE(m) -> str: # call when _OGO_RE matches (-ogo)
+    return m.group(1) + "в" + m.group(2)
 
 """constant for _proclitics()"""
 _PROCLITICS = {"а", "без", "безо", "благодаря", "близ", "в", "вне", "во", "для", "до", "за", "и", "из", "из-за",
@@ -112,28 +118,38 @@ def _flatten(line: str) -> str:
     return _PUNC_RE.sub("", "".join(result))
 
 
-def _ogo(word: str) -> str:
-    """Correct for -ого and lexical idiosyncrasies (e.g., солнце)
+def _lexical(line: str) -> str:
+    """Adjust for lexical idiosyncrasies (e.g., солнце)
+
+    Č > š: ильиничн.*, конечн.*, нарочн.*, никитичн.*, очечник.*, прачечн.*, саввичн.*, скучн.*, яичниц.*
+    Idiosyncrasies: grustn.*, zvezdn.*, zdravstvuj.*, izvestn.*, landšaft.*, lestn.*, mestn.*, okrestn.*, pozdn.*, prazdn.*,
+        segodnja, serdc.*, solnc.*, sčastliv.*, častn.*, čto.*, čtO.*, čuvstv.*
+    """
+    for key in _LEXICAL_DICT.keys():
+        line = key.sub(_LEXICAL_DICT[key], line)
+    return line
+
+
+def _ogo(line: str) -> str:
+    """Correct for -ого
     
     Keyword argument:
-    word -- word to process (Cyrillic)
+    line -- line to process (Cyrillic)
 
     g -> v in word-final -ogo/-ego (before stripping spaces, case-insensitive), except:
         (ne)?mnogo, strogo, ubogo, razlogo, otlogo, pologo, segodnja
-    Č > š: что(бы)?, конечн.*, нарочн.*, очечник.*, прачечн.*, скучно, яичниц.*, ильиничн.*, саввичн.*, никитичн.*
-    Idiosyncrasies: solnc.*, zdravstvuj.*, čuvstv*, zvezdn.*, landšaft.*, pozdno, prazdnik.*, serdc.*, grustn.*,
-        izvestn.*, lestn.*, mestn.*, okrestnost.*, častn.*, sčastliv.*; also segodnja
-    No more than one pattern can match, so no need to recurse over entire dictionary
     """
     # perform lexical substitutions
-    if _ALL_LEXICAL_RE.search(word):  # check for any match to avoid checking all of them when not needed
-        for key in _LEXICAL_DICT.keys():  # there's a match, so find the right key
-            if key.search(word):
-                word = key.sub(_LEXICAL_DICT[key], word)
-                break
-    if word not in _OGO_EXCEPTIONS:  # g -> v unless exception
-        word = _OGO_RE.sub(r'\1в\2', word)
-    return word
+    if line == None:
+        return ""
+    else:
+        result = []
+        for word in line.split():
+            if word in _OGO_EXCEPTIONS:
+                result.append(word)
+            else:
+                result.append(_OGO_RE.sub(_process_match_OGO_RE, word))
+        return " ".join(result).rstrip()
 
 
 def _proclitics(line: str) -> str:
@@ -234,6 +250,7 @@ def transliterate(line: str) -> str:  # TODO: trap non-XML input
         lambda value, function: function(value),
         (
             _flatten,
+            _lexical,
             _ogo,
             _proclitics,
             _enclitics,
