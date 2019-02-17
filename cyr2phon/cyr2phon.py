@@ -300,7 +300,7 @@ def _vowel_reduction(line: str) -> str:
 
 
 def _strip_spaces(line: str) -> str:
-    pass
+    return line.replace(" ", "")
 
 
 # public function
@@ -334,7 +334,8 @@ def transliterate(line: str) -> str:
             _regressive_voice,
             _regressive_palatalization,
             _consonant_cleanup,
-            _vowel_reduction
+            _vowel_reduction,
+            _strip_spaces
         ),
         line,
     )
