@@ -6,20 +6,21 @@ Public function:
 
 Private functions:
     _flatten : convert XML <stress> tags to uppercase; normalize case, punctuation, white space
-    _ogo: ogo -> ego
-    _proclitics() : merge _PROCLITICS with bases
-    _enclitics() : merge _ENCLITICS with bases
-    _tsa() : convert ть?ся$ to тса
-    _palatalize() : capitalize all palatalized consonants (including unpaired)
-    _jot() : normalize /j/, strip hard and soft signs
-    _romanize() : romanize now that all information is represented by the segment
-    _final_devoice() : devoice obstruents in auslaut
-    _regressive_devoice() : devoice obstruents and /v/ (regressive)
-    _regressive_voice() : voice obstruents, including /v/ (regressive)
-    _palatal_assimilation() : palatalization (regressive)
-    _consonant_cleanup() : c > ts, sč to šč, degeminate
-    _vowel_reduction() : unstressed non-high vowels are i after soft consonants and i < e, a < o after hard
-    _strip_spaces() : remove all spaces
+    _lexical : process lexical exceptions
+    _ogo : ogo -> ego
+    _proclitics : merge _PROCLITICS with bases
+    _enclitics : merge _ENCLITICS with bases
+    _tsa : convert ть?ся$ to тса
+    _palatalize : capitalize all palatalized consonants (including unpaired)
+    _jot : normalize /j/, strip hard and soft signs
+    _romanize : romanize now that all information is represented by the segment
+    _final_devoice : devoice obstruents in auslaut
+    _regressive_devoice : devoice obstruents and /v/ (regressive)
+    _regressive_voice : voice obstruents, including /v/ (regressive)
+    _palatal_assimilation : palatalization (regressive)
+    _consonant_cleanup : c > ts, sč to šč, degeminate
+    _vowel_reduction : unstressed non-high vowels are i after soft consonants and i < e, a < o after hard
+    _strip_spaces : remove all spaces
 """
 # imports
 from xml.dom import pulldom
