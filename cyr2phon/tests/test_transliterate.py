@@ -5,9 +5,9 @@ from xml.parsers.expat import ExpatError
 
 # test suite constants
 key_set = {r"\b" + item for item in {"ильИничн", "здрАвствуй", "лЕстн", "мЕстн", "очЕчник", "чтО", "что", "никИтичн",
-                                    "скУчн", "грУстн", "нарОчн", "счАстлив", "окрЕстн", "яИчниц", "ландшАфт",
-                                    "конЕчн", "прАздн", "чАстн", "прАчечн", "звЁздн", "извЕстн", "чУвств", "пОздн",
-                                    "сЕрдц", "сАввичн", "сегОдня", "сОлнц"}}
+                                     "скУчн", "грУстн", "нарОчн", "счАстлив", "окрЕстн", "яИчниц", "ландшАфт",
+                                     "конЕчн", "прАздн", "чАстн", "прАчечн", "звЁздн", "извЕстн", "чУвств", "пОздн",
+                                     "сЕрдц", "сАввичн", "сегОдня", "сОлнц"}}
 
 
 # constants
@@ -37,6 +37,18 @@ def test_lexical_data_members():
 
 
 # _flatten()
+def test_flatten_not_xml():
+    assert_raises(Exception, cyr2phon._flatten, "not xml")
+
+
+def test_flatten_empty():
+    assert_raises(Exception, cyr2phon._flatten, "")
+
+
+def test_flatten_bad_xml():
+    assert_raises(Exception, cyr2phon._flatten, "<stuff>Hi, Mom!</stuff>")
+
+
 def test_flatten_stress():
     expected = "бЕрег"
     assert_equal(cyr2phon._flatten("<line>б<stress>е</stress>рег</line>"), expected)
@@ -177,16 +189,3 @@ def test_transliterate_line():
     expected = "naBeRegU pustInnix vOln"
     assert_equal(cyr2phon.transliterate("<line>На берег<stress>у</stress> пуст<stress>ы</stress>нных "
                                         "в<stress>о</stress>лн</line>"), expected)
-
-
-def test_flatten_not_xml():
-    assert_raises(Exception, cyr2phon._flatten, "not xml")
-
-
-def test_flatten_empty():
-    assert_raises(Exception, cyr2phon._flatten, "")
-
-
-def test_flatten_bad_xml():
-    assert_raises(Exception, cyr2phon._flatten, "<stuff>Hi, Mom!</stuff>")
-
