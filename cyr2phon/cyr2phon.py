@@ -144,16 +144,13 @@ def _ogo(line: str) -> str:
         (ne)?mnogo, strogo, ubogo, razlogo, otlogo, pologo, segodnja
     """
     # perform lexical substitutions
-    if line == None:
-        return ""
-    else:
-        result = []
-        for word in line.split():
-            if word in _OGO_EXCEPTIONS:
-                result.append(word)
-            else:
-                result.append(_OGO_RE.sub(_process_match_OGO_RE, word))
-        return " ".join(result).rstrip()
+    result = []
+    for word in line.split():
+        if word in _OGO_EXCEPTIONS:
+            result.append(word)
+        else:
+            result.append(_OGO_RE.sub(_process_match_OGO_RE, word))
+    return " ".join(result).rstrip()
 
 
 def _proclitics(line: str) -> str:
