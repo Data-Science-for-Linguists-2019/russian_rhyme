@@ -141,7 +141,7 @@ def _proclitics(line: str) -> str:
     rstrip() because we add spurious space after last word
     """
     words = line.split()
-    return "".join([word if word in _PROCLITICS else word + " " for word in words ]).rstrip()
+    return "".join([word if word in _PROCLITICS else word + " " for word in words]).rstrip()
 
 
 def _enclitics(line: str) -> str:
