@@ -60,8 +60,9 @@ _ENCLITICS = {"бо", "бы", "же", "ли"}
 """constant for _tsa()"""
 _TSA_RE = re.compile(r'ться\b')  # reflexive
 
-"""constant and callback for _palatalize"""
+"""constants and callback for _palatalize"""
 _PAL_RE = re.compile(r'([бвгдзклмнпрстфх])([яеиёюЯЕИЁЮь])')  # C before softening V
+_PAL_TRANSTAB = str.maketrans('чщй', 'ЧЩЙ')
 
 
 def _process_match_PAL_RE(m) -> str:  # call when _PAL_RE matches (C before softening V)
@@ -71,6 +72,7 @@ def _process_match_PAL_RE(m) -> str:  # call when _PAL_RE matches (C before soft
 """constants and callbacks for _jot()"""
 _INTERV_JOT_RE = re.compile(r'([аэыоуяеиёюАЭЫОУЯЕИЁЮьъ])([яеиёюЯЕИЁЮ])')  # V before jotated V
 _INITIAL_JOT_RE = re.compile(r'\b[яеёюЯЕЁЮ]')
+_JOT_TRANSTAB = str.maketrans('яеиёюЯЕИЁЮ', 'аэыоуАЭЫОУ', 'ьъ')
 
 
 def _process_match_INTERV_JOT_RE(m) -> str:  # call when _INTERV_JOT_RE matches (VjV)
@@ -81,12 +83,17 @@ def _process_match_INITIAL_JOT_RE(m) -> str:  # call when _INITIAL_JOT_RE matche
     return "Й" + m.group(0)
 
 
+"""constant for _romanize()"""
+_ROMANIZE_TRANSTAB = str.maketrans('абвгджзклмнопрстуфхцшыэАБВГДЖЗЙКЛМНОПРСТУФХЦЧШЩЫЭ',
+                                   'abvgdžzklmnoprstufxcšieABVGDŽZJKLMNOPRSTUFXCČŠQIE')
+
 """constant and callback for _final_devoice()"""
 _FINAL_DEVOICE_RE = re.compile(r'[bvgdžzBVGDZ]\b')
-_FINAL_DEVOICE_transtab = str.maketrans('bvgdžzBVGDZ', 'pfktšsPFKTS')
+_FINAL_DEVOICE_TRANSTAB = str.maketrans('bvgdžzBVGDZ', 'pfktšsPFKTS')
+
 
 def _process_match_FINAL_DEVOICE(m) -> str:  # call when _FINAL_DEVOICE_RE matches (voiced obstruent in auslaut)
-    return m.group(0).translate(_FINAL_DEVOICE_transtab)
+    return m.group(0).translate(_FINAL_DEVOICE_TRANSTAB)
 
 
 # private functions
@@ -178,8 +185,7 @@ def _tsa(line: str) -> str:
 
 def _palatalize(line: str) -> str:
     """Capitalize all palatalized consonants (including unpaired)"""
-    transtab = str.maketrans('чщй', 'ЧЩЙ')
-    return _PAL_RE.sub(_process_match_PAL_RE, line).translate(transtab)
+    return _PAL_RE.sub(_process_match_PAL_RE, line).translate(_PAL_TRANSTAB)
 
 
 def _jot(line: str) -> str:
@@ -189,18 +195,14 @@ def _jot(line: str) -> str:
     Convert softening vowels to non-softening
     Strip hard and soft signs
     """
-    transtab = str.maketrans('яеиёюЯЕИЁЮ', 'аэыоуАЭЫОУ', 'ьъ')
     t1 = _INTERV_JOT_RE.sub(_process_match_INTERV_JOT_RE, line)  # VjV, ьjV
     t2 = _INITIAL_JOT_RE.sub(_process_match_INITIAL_JOT_RE, t1)  # processes softening vowels except и in anlaut
-    return t2.translate(transtab)  # conflate softening vowels into regular ones, strip signs
+    return t2.translate(_JOT_TRANSTAB)  # conflate softening vowels into regular ones, strip signs
 
 
-# noinspection SpellCheckingInspection
 def _romanize(line: str) -> str:
     """Romanize text"""
-    transtab = str.maketrans('абвгджзклмнопрстуфхцшыэАБВГДЖЗЙКЛМНОПРСТУФХЦЧШЩЫЭ',
-                             'abvgdžzklmnoprstufxcšieABVGDŽZJKLMNOPRSTUFXCČŠQIE')
-    return line.translate(transtab).replace("Щ", "ŠČ")  # only щ is not one-to-one
+    return line.translate(_ROMANIZE_TRANSTAB).replace("Щ", "ŠČ")  # only щ is not one-to-one
 
 
 def _final_devoice(line: str) -> str:

@@ -1,7 +1,7 @@
-from cyr2phon import cyr2phon
-from nose.tools import *
 import re
-from xml.parsers.expat import ExpatError
+from nose.tools import *
+
+from cyr2phon import cyr2phon
 
 # test suite constants
 key_set = {r"\b" + item for item in {"ильИничн", "здрАвствуй", "лЕстн", "мЕстн", "очЕчник", "чтО", "что", "никИтичн",
