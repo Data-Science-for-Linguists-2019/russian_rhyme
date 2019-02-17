@@ -1,3 +1,19 @@
+# Progress report
+
+## 1st Progress Report
+
+### Summary
+
+Links to notebooks
+Links to data samples
+
+### Sharing plan
+
+How much to share
+What to share
+Justification
+
+
 ____
 
 ## Rubric
