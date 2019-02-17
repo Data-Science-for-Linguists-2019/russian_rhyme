@@ -218,10 +218,17 @@ def _strip_spaces():
 
 # public function
 def transliterate(line: str) -> str:  # TODO: trap non-XML input
-    """Transliterate input line
+    """
+    Transliterate input line from Cyrillic XML to Roman string
 
     Pipe input XML line through private function pipeline
     See: https://softwarejourneyman.com/python-function-pipelines.html
+
+    Keyword parameters:
+    line (str): a line of verse as well-formed XML, with only <line> and <stress> tags
+
+    Returns:
+    str: transliterated line
     """
     return functools.reduce(
         lambda value, function: function(value),
