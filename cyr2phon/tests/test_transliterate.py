@@ -1,6 +1,7 @@
 from cyr2phon import cyr2phon
 from nose.tools import *
 import re
+from xml.parsers.expat import ExpatError
 
 # test suite constants
 key_set = {r"\b" + item for item in {"ильИничн", "здрАвствуй", "лЕстн", "мЕстн", "очЕчник", "чтО", "что", "никИтичн",
@@ -178,8 +179,14 @@ def test_transliterate_line():
                                         "в<stress>о</stress>лн</line>"), expected)
 
 
-def test_transliterate_empty():
-    expected = ""
-    assert_equal(cyr2phon.transliterate(""), expected)
+def test_flatten_not_xml():
+    assert_raises(Exception, cyr2phon._flatten, "not xml")
 
+
+def test_flatten_empty():
+    assert_raises(Exception, cyr2phon._flatten, "")
+
+
+def test_flatten_bad_xml():
+    assert_raises(Exception, cyr2phon._flatten, "<stuff>Hi, Mom!</stuff>")
 

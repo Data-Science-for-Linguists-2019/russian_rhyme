@@ -29,6 +29,8 @@ import json
 import pkgutil
 import functools
 
+
+_XML_RE = re.compile(r"<line>.*</line>")
 # TODO: move transtab assignments out of function declarations
 # constants
 # TODO: use regex character class to strip non-letters instead of punctuation?
@@ -102,21 +104,23 @@ def _flatten(line: str) -> str:
     Strip punctuation
     Normalize white space
     """
-    in_stress = 0  # are we inside a <stress> element?
-    result = []  # accumulate output string
-    doc = pulldom.parseString(line)
-    for event, node in doc:
-        if event == pulldom.START_ELEMENT and node.localName == 'stress':
-            in_stress = 1
-        elif event == pulldom.END_ELEMENT and node.localName == 'stress':
-            in_stress = 0
-        elif event == pulldom.CHARACTERS:
-            if in_stress:
-                result.append(node.data.upper())
-            else:
-                result.append(node.data.lower())
-    return _PUNC_RE.sub("", "".join(result))
-
+    if _XML_RE.match(line):
+        in_stress = 0  # are we inside a <stress> element?
+        result = []  # accumulate output string
+        doc = pulldom.parseString(line)
+        for event, node in doc:
+            if event == pulldom.START_ELEMENT and node.localName == 'stress':
+                in_stress = 1
+            elif event == pulldom.END_ELEMENT and node.localName == 'stress':
+                in_stress = 0
+            elif event == pulldom.CHARACTERS:
+                if in_stress:
+                    result.append(node.data.upper())
+                else:
+                    result.append(node.data.lower())
+        return _PUNC_RE.sub("", "".join(result))
+    else:
+        raise Exception (line, "is not tagged correctly")
 
 def _lexical(line: str) -> str:
     """Adjust for lexical idiosyncrasies (e.g., солнце)
@@ -233,7 +237,7 @@ def _strip_spaces():
 
 
 # public function
-def transliterate(line: str) -> str:  # TODO: trap non-XML input
+def transliterate(line: str) -> str:
     """
     Transliterate input line from Cyrillic XML to Roman string
 
