@@ -245,19 +245,19 @@ def _regressive_voice(line: str) -> str:
     return _REGRESSIVE_VOICE_RE.sub(_process_match_REGRESSIVE_VOICE, line)
 
 
-def _palatal_assimilation():
+def _palatal_assimilation(line: str) -> str:
     pass
 
 
-def _consonant_cleanup():
+def _consonant_cleanup(line: str) -> str:
     pass
 
 
-def _vowel_reduction():
+def _vowel_reduction(line: str) -> str:
     pass
 
 
-def _strip_spaces():
+def _strip_spaces(line: str) -> str:
     pass
 
 
@@ -289,7 +289,7 @@ def transliterate(line: str) -> str:
             _romanize,
             _final_devoice,
             _regressive_devoice,
-            _regressive_voice
+            _regressive_voice,
         ),
         line,
     )
