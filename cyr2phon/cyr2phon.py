@@ -136,14 +136,12 @@ def _ogo(word: str) -> str:
 
 
 def _proclitics(line: str) -> str:
-    """Merge _PROCLITICS with bases"""
-    output_line = []
+    """Merge _PROCLITICS with bases
+
+    rstrip() because we add spurious space after last word
+    """
     words = line.split()
-    for word in words:
-        output_line.append(word)
-        if word not in _PROCLITICS:
-            output_line.append(" ")
-    return "".join(output_line).strip()  # we added a spurious space after the last word
+    return "".join([word if word in _PROCLITICS else word + " " for word in words ]).rstrip()
 
 
 def _enclitics(line: str) -> str:
