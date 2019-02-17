@@ -29,16 +29,14 @@ import json
 import pkgutil
 import functools
 
+"""constants for _flatten()"""
 _XML_RE = re.compile(r"<line>.*</line>")
-# TODO: move transtab assignments out of function declarations
-# constants
 # TODO: use regex character class to strip non-letters instead of punctuation?
 _PUNC_RE = re.compile("[" + string.punctuation.replace("-", "") + "«»]+")  # strip all punc except hyphen
 
 """constants for _lexical()"""
 _lexical_data = json.loads(
     pkgutil.get_data(__package__, 'lexical.json').decode('utf-8'))  # needed to refer to file inside package
-# _ALL_LEXICAL_RE = re.compile("|".join(_lexical_data.keys()))  # omnibus regex, keys are strings for this part
 _LEXICAL_DICT = {re.compile(r"\b" + key): value for key, value in _lexical_data.items()}  # regexes for lookup
 
 """constants and callback for _ogo()"""
@@ -85,11 +83,10 @@ def _process_match_INITIAL_JOT_RE(m) -> str:  # call when _INITIAL_JOT_RE matche
 
 """constant and callback for _final_devoice()"""
 _FINAL_DEVOICE_RE = re.compile(r'[bvgdžzBVGDZ]\b')
-
+_FINAL_DEVOICE_transtab = str.maketrans('bvgdžzBVGDZ', 'pfktšsPFKTS')
 
 def _process_match_FINAL_DEVOICE(m) -> str:  # call when _FINAL_DEVOICE_RE matches (voiced obstruent in auslaut)
-    transtab = str.maketrans('bvgdžzBVGDZ', 'pfktšsPFKTS')
-    return ""  # TODO: Placeholder
+    return m.group(0).translate(_FINAL_DEVOICE_transtab)
 
 
 # private functions
@@ -206,9 +203,10 @@ def _romanize(line: str) -> str:
     return line.translate(transtab).replace("Щ", "ŠČ")  # only щ is not one-to-one
 
 
-# def _final_devoice(line: str) -->:
-#     """Devoice final obstruents"""
-#     _FINAL_VOICED_RE.sub(, line)
+def _final_devoice(line: str) -> str:
+    """Devoice final obstruents"""
+    return _FINAL_DEVOICE_RE.sub(_process_match_FINAL_DEVOICE, line)
+
 
 def _regressive_devoice():
     pass
@@ -259,7 +257,8 @@ def transliterate(line: str) -> str:
             _tsa,
             _palatalize,
             _jot,
-            _romanize
+            _romanize,
+            _final_devoice
         ),
         line,
     )

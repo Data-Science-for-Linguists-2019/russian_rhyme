@@ -177,6 +177,17 @@ def test_romanize_all():
     assert_equal(cyr2phon._romanize("абвгджзклмнопрстуфхцшыэ АБВГДЖЗЙКЛМНОПРСТУФХЦЧШЩЫЭ"), expected)
 
 
+# _final_devoice()
+def test_final_devoice_drug():
+    expected = "drUk"
+    assert_equal(cyr2phon._final_devoice("drUg"), expected)
+
+
+def test_final_devoice_drug_i_vrag():
+    expected = "drUk ivrAk"
+    assert_equal(cyr2phon._final_devoice("drUg ivrAg"), expected)
+
+
 # translate()
 # These are really integration tests, since transliterate() calls all other functions
 def test_transliterate_lexical_ogo():
