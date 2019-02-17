@@ -132,12 +132,22 @@ def _process_match_REGRESSIVE_PALATALIZATION(m) -> str:
     return m.group(0).upper()
 
 
-"""constants and callback for _consonant_cleanup"""
+"""constant and callback for _consonant_cleanup"""
 _CONSONANT_CLEANUP_GEMINATE_RE = re.compile(r'([^AEIOUaeiou])\1')
 
 
 def _process_match_CONSONANT_CLEANUP(m) -> str:
     return m.group(1)
+
+
+"""consants and callback for _vowel_reduction"""
+
+_VOWEL_REDUCTION_RE = re.compile(r'([BVGDJZKLMNPRSTFXČ])([eao])')
+_VOWEL_REDUCTION_TRANSTAB = str.maketrans("eo", "ia")
+
+
+def _process_match_VOWEL_REDUCTION(m) -> str:
+    return m.group(1) + "i"
 
 
 # private functions
@@ -281,7 +291,12 @@ def _consonant_cleanup(line: str) -> str:
 
 
 def _vowel_reduction(line: str) -> str:
-    pass
+    """Reduce unstressed vowels
+
+    non-high vowels > i after soft consonants
+     e > i and o > a after hard
+    """
+    return _VOWEL_REDUCTION_RE.sub(_process_match_VOWEL_REDUCTION, line).translate(_VOWEL_REDUCTION_TRANSTAB)
 
 
 def _strip_spaces(line: str) -> str:
@@ -318,7 +333,8 @@ def transliterate(line: str) -> str:
             _regressive_devoice,
             _regressive_voice,
             _regressive_palatalization,
-            _consonant_cleanup
+            _consonant_cleanup,
+            _vowel_reduction
         ),
         line,
     )

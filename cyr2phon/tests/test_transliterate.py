@@ -226,16 +226,22 @@ def test_consonant_cleanup_otca():
     assert_equal(cyr2phon._consonant_cleanup("otcA"), expected)
 
 
+# _vowel_reduction
+def test_vowel_reduction():
+    expected = "garadadastapRiMiČATiLnasTi"
+    assert_equal(cyr2phon._vowel_reduction("gorododostopRiMeČATeLnosTi"), expected)
+
+
 # translate()
 # These are really integration tests, since transliterate() calls all other functions
 def test_transliterate_lexical_ogo():
-    expected = "zdrAstvuJTe otnAševo grUsnovo drUga"
+    expected = "zdrAstvuJTi atnAšiva grUsnava drUga"
     assert_equal(cyr2phon.transliterate("<line>Здр<stress>а</stress>вствуйте от н<stress>а</stress>шего "
                                         "гр<stress>у</stress>стного др<stress>у</stress>га!</line>"), expected)
 
 
 def test_transliterate_enclitic_final_devoice():
-    expected = "bOgbi proSTIl"
+    expected = "bOgbi praSTIl"
     assert_equal(cyr2phon.transliterate("<line>Б<stress>о</stress>г бы прост<stress>и</stress>л</line>"), expected)
 
 
@@ -247,12 +253,12 @@ def test_transliterate_devoice():
 
 
 def test_transliterate_regressive_palatalization():
-    expected = "snOvim SČASTJem"
+    expected = "snOvim SČASTJim"
     assert_equal(cyr2phon.transliterate("<line>С н<stress>о</stress>вым сч<stress>а</stress>стьем!</line>"), expected)
 
 
 def test_transliterate_line():
-    expected = "naBeRegU pustInix vOln"
+    expected = "naBiRigU pustInix vOln"
     assert_equal(cyr2phon.transliterate("<line>На берег<stress>у</stress> пуст<stress>ы</stress>нных "
                                         "в<stress>о</stress>лн</line>"), expected)
 
