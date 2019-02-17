@@ -96,6 +96,14 @@ def _process_match_FINAL_DEVOICE(m) -> str:  # call when _FINAL_DEVOICE_RE match
     return m.group(0).translate(_FINAL_DEVOICE_TRANSTAB)
 
 
+"""constants and callback for _regressive_devoice()"""
+_REGRESSIVE_DEVOICE_RE = re.compile(r'([bvgdžzBVGDZpfktšsPFKTSkcČ]+)([pfktšsPFKTSkcČ])')
+_REGRESSIVE_DEVOICE_TRANSTAB = str.maketrans('bvgdžzBVGDZ', 'pfktšsPFKTS')
+
+def _process_match_REGRESSIVE_DEVOICE(m) -> str: # call when _REGRESSIVE_DEVOICE_RE matches (voiced/_voiceless)
+    return m.group(1).translate(_REGRESSIVE_DEVOICE_TRANSTAB) + m.group(2)
+
+
 # private functions
 def _flatten(line: str) -> str:
     """Clean and flatten input
@@ -210,8 +218,9 @@ def _final_devoice(line: str) -> str:
     return _FINAL_DEVOICE_RE.sub(_process_match_FINAL_DEVOICE, line)
 
 
-def _regressive_devoice():
-    pass
+def _regressive_devoice(line: str) -> str:
+    """Regressive devoicing; v is easier to handle if we devoice first"""
+    return _REGRESSIVE_DEVOICE_RE.sub(_process_match_REGRESSIVE_DEVOICE, line)
 
 
 def _regressive_voice():
@@ -260,7 +269,8 @@ def transliterate(line: str) -> str:
             _palatalize,
             _jot,
             _romanize,
-            _final_devoice
+            _final_devoice,
+            _regressive_devoice
         ),
         line,
     )
