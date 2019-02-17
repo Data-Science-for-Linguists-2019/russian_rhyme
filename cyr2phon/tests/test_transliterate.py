@@ -18,7 +18,13 @@ def test_PUNC_RE():
 
 def test_OGO_RE():
     for s in ["ого", "его", "Ого", "Его", "огО", "егО"]:
-        assert_regexp_matches(s, cyr2phon._OGO_RE)
+        fn = lambda: _check_OGO_RE(s)
+        fn.description = "cyr2phon.tests.test_transliterate.test_OGO_RE with {}".format(s)
+        yield fn
+
+
+def _check_OGO_RE(s):
+    assert_regexp_matches(s, cyr2phon._OGO_RE)
 
 
 def test_OGO_EXCEPTIONS():
