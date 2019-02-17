@@ -87,7 +87,7 @@ def _process_match_INITIAL_JOT_RE(m) -> str:  # call when _INITIAL_JOT_RE matche
 _ROMANIZE_TRANSTAB = str.maketrans('абвгджзклмнопрстуфхцшыэАБВГДЖЗЙКЛМНОПРСТУФХЦЧШЩЫЭ',
                                    'abvgdžzklmnoprstufxcšieABVGDŽZJKLMNOPRSTUFXCČŠQIE')
 
-"""constant and callback for _final_devoice()"""
+"""constants and callback for _final_devoice()"""
 _FINAL_DEVOICE_RE = re.compile(r'[bvgdžzBVGDZ]\b')
 _FINAL_DEVOICE_TRANSTAB = str.maketrans('bvgdžzBVGDZ', 'pfktšsPFKTS')
 
@@ -102,6 +102,20 @@ _REGRESSIVE_DEVOICE_TRANSTAB = str.maketrans('bvgdžzBVGDZ', 'pfktšsPFKTS')
 
 def _process_match_REGRESSIVE_DEVOICE(m) -> str: # call when _REGRESSIVE_DEVOICE_RE matches (voiced/_voiceless)
     return m.group(1).translate(_REGRESSIVE_DEVOICE_TRANSTAB) + m.group(2)
+
+
+"""constants and callback for _regressive_voice()
+
+ɣ (LC) = U+0263, Ɣ (UC) = U+0194
+ʒ (LC) = U+0292, Ʒ (UC) = U+01B7
+ǯ (LC) = U+01EF, Ǯ (UC) = U+01EE   
+"""
+_REGRESSIVE_VOICE_RE = re.compile(r'([bvgdžzBVGDZpfktšsPFKTSxcČ]+)([bgdžzBGDZ])')
+_REGRESSIVE_VOICE_TRANSTAB = str.maketrans('pfktšsPFKTSxcČ', 'bvgdžzBVGDZɣʒǮ')
+
+
+def _process_match_REGRESSIVE_VOICE(m) -> str:  # call when REGRESSIVE_VOICE_RE matches (voiceless/_voiced)
+    return m.group(1).translate(_REGRESSIVE_VOICE_TRANSTAB) + m.group(2)
 
 
 # private functions
@@ -219,12 +233,16 @@ def _final_devoice(line: str) -> str:
 
 
 def _regressive_devoice(line: str) -> str:
-    """Regressive devoicing; v is easier to handle if we devoice first"""
+    """Regressive devoicing of obstruents, including v
+
+    v is easier to handle if we devoice first
+    """
     return _REGRESSIVE_DEVOICE_RE.sub(_process_match_REGRESSIVE_DEVOICE, line)
 
 
-def _regressive_voice():
-    pass
+def _regressive_voice(line: str) -> str:
+    """Regressive voicing of obstruents, but not before /v/"""
+    return _REGRESSIVE_VOICE_RE.sub(_process_match_REGRESSIVE_VOICE, line)
 
 
 def _palatal_assimilation():
@@ -270,7 +288,8 @@ def transliterate(line: str) -> str:
             _jot,
             _romanize,
             _final_devoice,
-            _regressive_devoice
+            _regressive_devoice,
+            _regressive_voice
         ),
         line,
     )
