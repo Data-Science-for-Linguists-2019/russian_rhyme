@@ -33,6 +33,7 @@ import functools
 """constants for _flatten()"""
 _XML_RE = re.compile(r"<line>.*</line>")  # TODO: check for balanced <stress> tags
 # TODO: use regex character class to strip non-letters instead of punctuation?
+# TODO: parameterize where possible
 _PUNC_RE = re.compile("[" + string.punctuation.replace("-", "") + "«»]+")  # strip all punc except hyphen
 
 """constants for _lexical()"""
@@ -129,6 +130,14 @@ _REGRESSIVE_PALATALIZATION_RE = re.compile(r'[tdnszTDNSZČLJ]+[TDNSZČLJ]|ŠČ')
 
 def _process_match_REGRESSIVE_PALATALIZATION(m) -> str:
     return m.group(0).upper()
+
+
+"""constants and callback for _consonant_cleanup"""
+_CONSONANT_CLEANUP_GEMINATE_RE = re.compile(r'([^AEIOUaeiou])\1')
+
+
+def _process_match_CONSONANT_CLEANUP(m) -> str:
+    return m.group(1)
 
 
 # private functions
@@ -264,7 +273,11 @@ def _regressive_palatalization(line: str) -> str:
 
 
 def _consonant_cleanup(line: str) -> str:
-    pass
+    """c -> ts, degeminate
+
+    ordered, e.g., otca
+    """
+    return _CONSONANT_CLEANUP_GEMINATE_RE.sub(_process_match_CONSONANT_CLEANUP, line.replace("c", "ts"))
 
 
 def _vowel_reduction(line: str) -> str:
@@ -304,7 +317,8 @@ def transliterate(line: str) -> str:
             _final_devoice,
             _regressive_devoice,
             _regressive_voice,
-            _regressive_palatalization
+            _regressive_palatalization,
+            _consonant_cleanup
         ),
         line,
     )

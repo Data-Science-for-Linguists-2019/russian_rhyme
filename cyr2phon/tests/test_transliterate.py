@@ -220,6 +220,12 @@ def test_regressive_palatalization_schastie():
     assert_equal(cyr2phon._regressive_palatalization("sČAsTiJe"), expected)
 
 
+# _consonant_cleanup (c -> cs, degeminate)
+def test_consonant_cleanup_otca():
+    expected = "otsA"
+    assert_equal(cyr2phon._consonant_cleanup("otcA"), expected)
+
+
 # translate()
 # These are really integration tests, since transliterate() calls all other functions
 def test_transliterate_lexical_ogo():
@@ -246,7 +252,7 @@ def test_transliterate_regressive_palatalization():
 
 
 def test_transliterate_line():
-    expected = "naBeRegU pustInnix vOln"
+    expected = "naBeRegU pustInix vOln"
     assert_equal(cyr2phon.transliterate("<line>На берег<stress>у</stress> пуст<stress>ы</stress>нных "
                                         "в<stress>о</stress>лн</line>"), expected)
 
