@@ -29,6 +29,7 @@ import json
 import pkgutil
 import functools
 
+# TODO: move transtab assignments out of function declarations
 # constants
 # TODO: use regex character class to strip non-letters instead of punctuation?
 _PUNC_RE = re.compile("[" + string.punctuation.replace("-", "") + "«»]+")  # strip all punc except hyphen
