@@ -13,14 +13,27 @@ David J. Birnbaum
 
 ### Code
 
-* _cyr2phon_: Cyrillic to phonetic library; exposes `cyr2phon.transliterate()`
+#### Product
+
+* [*cyr2phon*](cyr2phon/cyr2phon.py): Cyrillic to phonetic library; exposes `cyr2phon.transliterate()`
+
+
+#### Development
+
+* [*test_transliterate*](cyr2phon/tests/test_transliterate.py): Nose tests for [_cyr2phon_](cyr2phon/cyr2phon.py)
+* [*.travis.yml*](.travis.yml) and [*requirements.txt*](requirements.txt): Configuration information for [Travis CI](https://docs.travis-ci.com/user/tutorial/)
+
+### Data
+
+**[To be added]**
 
 ### Documentation
 
-* [project_plan.md](project_plan.md): Original project proposal
-* [degrees-of-rhyme.md](degrees-of-rhyme.md): Examples or types of imperfect rhyme, with discussion
+* [*project_plan.md*](project_plan.md): Original project proposal
+* [*degrees-of-rhyme.md*](degrees-of-rhyme.md): Examples or types of imperfect rhyme, with discussion
+* [*progress_report.md*](progress_report.md): Progress report (last updated 2019-02-17)
 
 ____
 
-**Acknowledgements:** Thanks to Na-Rae Han, Jevon Heath, and Daniel Zheng for comments and suggestions.
+**Acknowledgements:** Stanza markup in the Puškin corpus was implemented by Kyleen Pickering. Thanks to Na-Rae Han, Jevon Heath, and Daniel Zheng for comments and suggestions.
 
