@@ -303,8 +303,9 @@ def _vowel_reduction(line: str) -> str:
     return _VOWEL_REDUCTION_RE.sub(_process_match_VOWEL_REDUCTION, line).translate(_VOWEL_REDUCTION_TRANSTAB)
 
 
-def _strip_spaces(line: str) -> str:
-    return line.replace(" ", "")
+# removed; output as separate words instead
+# def _strip_spaces(line: str) -> str:
+#     return line.replace(" ", "")
 
 
 # public function
