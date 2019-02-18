@@ -18,6 +18,7 @@ def test_PUNC_RE():
 
 def test_OGO_RE():
     for s in ["ого", "его", "Ого", "Его", "огО", "егО"]:
+        # TODO: https://stackoverflow.com/questions/25010167/e731-do-not-assign-a-lambda-expression-use-a-def
         fn = lambda: _check_OGO_RE(s)
         fn.description = "cyr2phon.tests.test_transliterate.test_OGO_RE with {}".format(s)
         yield fn
@@ -42,6 +43,7 @@ def test_lexical_data_members():
         fn = lambda: check_lexical_data_members(item)
         fn.description = "cyr2phon.tests.test_transliterate.test_lexical_data_members with {}".format(item)
         yield fn
+
 
 def check_lexical_data_members(item):
     assert_in(re.compile(item), cyr2phon._LEXICAL_DICT.keys())
