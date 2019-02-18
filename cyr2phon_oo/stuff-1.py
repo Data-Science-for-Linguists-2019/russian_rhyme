@@ -18,6 +18,7 @@ str
 
 
 def make_f(constants: Optional[dict] = None, callbacks: Optional[dict] = None, function: str = None):
+    # FIXME: getting "shadowing inner scope" and "unused locl" warnings; is this a problem?
     def f(line: str, constants: Optional[dict] = constants, callbacks: Optional[dict] = callbacks,
           function=function) -> str:
         return eval(function)
