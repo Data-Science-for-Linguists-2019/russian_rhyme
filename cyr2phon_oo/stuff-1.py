@@ -2,7 +2,6 @@ import regex as re
 from typing import Optional
 
 # experiment with function factory to bind constants with function
-# can we return, instead of printing explicitly?
 
 """
 Create callable named function, bundling constants and callback with function code
@@ -18,7 +17,7 @@ str
 
 
 def make_f(constants: Optional[dict] = None, callbacks: Optional[dict] = None, function: str = None):
-    # FIXME: getting "shadowing inner scope" and "unused locl" warnings; is this a problem?
+    # FIXME: getting "shadowing inner scope" and "unused local" warnings; is this a problem?
     def f(line: str, constants: Optional[dict] = constants, callbacks: Optional[dict] = callbacks,
           function=function) -> str:
         return eval(function)
@@ -33,5 +32,6 @@ a = make_f(constants={
 constants["pattern"].sub('x', line.upper()), (constants["age"])
 """)
 print("Y", a("koala"), "Y")
+print("Z", a("platypus"), "Z")
 print(type(a))
 print(dir(a))
