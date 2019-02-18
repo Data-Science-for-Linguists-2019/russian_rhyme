@@ -29,12 +29,14 @@ import json
 import pkgutil
 import functools
 
+# TODO: SČ -> ŠC (sčast'e)
+
 """constants for _flatten()
 
 <line> root, balanced <stress>, no other markup
 """
+# TODO: allow attributes on <line>
 _XML_RE = re.compile(r"<line>(<stress>[аэыоуАЭЫОУяеиёюЯЕИЁЮ]</stress>|[^<>]+)+</line>")
-# TODO: parameterize where possible
 _PUNC_RE = re.compile(r'(?V1)[\p{P}\p{S}--[-]]')  # strip all punc except hyphen
 
 """constants for _lexical()"""
@@ -336,8 +338,7 @@ def transliterate(line: str) -> str:
             _regressive_voice,
             _regressive_palatalization,
             _consonant_cleanup,
-            _vowel_reduction,
-            _strip_spaces
+            _vowel_reduction
         ),
         line,
     )
