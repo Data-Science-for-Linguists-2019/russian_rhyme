@@ -7,7 +7,7 @@ from typing import Optional
 
 class F:
     """
-    Create named function, bundling constants and callback with name and function code
+    Create callable named function, bundling constants and callback with function code
 
     Keyword parameters:
     constants (dict; optional): name:value; e.g., for regex expressions and translation tables
@@ -15,7 +15,9 @@ class F:
     function (str; required): function body as (possibly multiline) string, with proper indentation
 
     Returns:
-    str (specific to this project; could be told to return other types)
+    str
+
+    TODO: Can we use return, instead of print, to get the result
     """
     def __init__(self, constants: Optional[dict] = None, callbacks: Optional[dict] = None,
                  function: str = None):
