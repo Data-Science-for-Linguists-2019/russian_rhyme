@@ -3,23 +3,22 @@ from typing import Optional
 
 
 # experiment with function factory to bind constants with function
+# can we return, instead of printing explicitly?
 
 class F:
     """
     Create named function, bundling constants and callback with name and function code
 
     Keyword parameters:
-    name (str; required): function name
-    constants (dict; optional): name:value; for regex expressions and translation tables
-    callbacks (dict; optional): name:value; for re.sub() replacement functions
+    constants (dict; optional): name:value; e.g., for regex expressions and translation tables
+    callbacks (dict; optional): name:value; e.g., for re.sub() replacement functions
     function (str; required): function body as (possibly multiline) string, with proper indentation
 
     Returns:
     str (specific to this project; could be told to return other types)
     """
-    def __init__(self, name: str, constants: Optional[dict] = None, callbacks: Optional[dict] = None,
+    def __init__(self, constants: Optional[dict] = None, callbacks: Optional[dict] = None,
                  function: str = None):
-        self.__name__ = name
         self.constants = constants
         self.callbacks = callbacks
         self.function = function
@@ -28,12 +27,11 @@ class F:
         exec(self.function)
 
 
-# sample function; name is 'tuber', uses two constants, one of which is a regex
-a = F('tuber',
-      constants={
+# sample function, uses two constants, one of which is a compiled regex
+a = F(constants={
           "pattern": re.compile(r"[AEIOU]"),
           "age": 33},
       function="""
-print(self.constants["pattern"].sub('x', line.upper()) + str(self.constants["age"]))
+print(self.constants["pattern"].sub('x', line.upper()), (self.constants["age"]))
 """)
-a('spud')
+a('spud') # returns >>> SPxD 33
