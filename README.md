@@ -5,7 +5,6 @@
 # Machine-assisted identification of rhyme in Russian verse
 
 David J. Birnbaum  
-**Last modified:** 2019-02-03
 
 ## Files and directories
 
