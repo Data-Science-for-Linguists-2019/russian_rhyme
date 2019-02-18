@@ -7,8 +7,6 @@
 David J. Birnbaum  
 **Last modified:** 2019-02-03
 
-**Credit:** This project is a contribution to [Meter, rhythm, and rhyme: the computationally assisted analysis of formal features in Russian poetry](http://poetry.obdurodon.org/), co-developed by David J. Birnbaum and Elise Thorsen. The content here builds on collaborative work from that larger project.
-
 ## Files and directories
 
 ### Code
@@ -35,5 +33,9 @@ David J. Birnbaum
 
 ____
 
-**Acknowledgements:** Stanza markup in the Puškin corpus was implemented by Kyleen Pickering. Thanks to Na-Rae Han, Jevon Heath, and Daniel Zheng for comments and suggestions.
+**Acknowledgements**
+
+* This project is a contribution to [Meter, rhythm, and rhyme: the computationally assisted analysis of formal features in Russian poetry](http://poetry.obdurodon.org/), co-developed by David J. Birnbaum and Elise Thorsen. The content here builds on collaborative work from that larger project. 
+* Stanza markup in the Puškin corpus was implemented by Kyleen Pickering. 
+* Thanks to Na-Rae Han, Jevon Heath, and Daniel Zheng for comments and suggestions.
 
