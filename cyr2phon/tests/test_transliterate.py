@@ -39,7 +39,12 @@ def test_lexical_data_size():
 
 def test_lexical_data_members():
     for item in key_set:
-        assert_in(re.compile(item), cyr2phon._LEXICAL_DICT.keys())
+        fn = lambda: check_lexical_data_members(item)
+        fn.description = "cyr2phon.tests.test_transliterate.test_lexical_data_members with {}".format(item)
+        yield fn
+
+def check_lexical_data_members(item):
+    assert_in(re.compile(item), cyr2phon._LEXICAL_DICT.keys())
 
 
 # _flatten()
@@ -151,14 +156,26 @@ def test_palatalize():
     assert_equal(cyr2phon._palatalize("на берегУ пустЫнных вОлн"), expected)
 
 
-def test_palatalize_all_front_vowels():
+def test_palatalize_front_vowel():
     for v in "яеиёюЯЕИЁЮ":
-        assert_equal(cyr2phon._palatalize("б" + v), "Б" + v)
+        fn = lambda: check_palatalize_front_vowel(v)
+        fn.description = "cyr2phon.tests.test_transliterate.test_palatalize_front_vowel with {}".format(v)
+        yield fn
 
 
-def test_palatalize_all_back_vowels():
+def check_palatalize_front_vowel(v):
+    assert_equal(cyr2phon._palatalize("б" + v), "Б" + v)
+
+
+def test_palatalize_all_back_vowel():
     for v in "аэыоуАЭЫОУ":
-        assert_equal(cyr2phon._palatalize("б" + v), "б" + v)
+        fn = lambda: check_palatalize_back_vowel(v)
+        fn.description = "cyr2phon.tests.test_transliterate.test_palatalize_back_vowel with {}".format(v)
+        yield fn
+
+
+def check_palatalize_back_vowel(v):
+    assert_equal(cyr2phon._palatalize("б" + v), "б" + v)
 
 
 def test_palatalize_unpaired():
