@@ -72,6 +72,7 @@ The disadvantage of working only with the *EO* subcorpus is that any modeling wi
 * Creating and using a package
 * Using `reduce()` to construct a function pipeline
 * Using the `regex` package as a replacement for `re` to support nested sets and set operations on patterns	
+* Using closures (compared to imperative and object-oriented approaches to encapsulation)
 * Creating and running nose tests
 	* Inside PyCharm and on the command line
 	* With coverage
