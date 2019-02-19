@@ -16,7 +16,7 @@ David J. Birnbaum
 
 #### Data (sample)
 
-* [*eo1.xml*](data_samples/eo1.xml): First book of Aleksandr Puškin’s *Eugene Onegin*; see the [Progress report](progress_report.md#about-the-corpus) for a description of the data source)
+* [*eo1.xml*](data_samples/eo1.xml): First book of Aleksandr Puškin’s *Eugene Onegin*; see the [Progress report](progress_report.md#about-the-corpus) for a description of the data source
 
 #### Development
 
