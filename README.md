@@ -14,6 +14,9 @@ David J. Birnbaum
 
 * [*cyr2phon*](cyr2phon/cyr2phon.py): Cyrillic to phonetic library; exposes `cyr2phon.transliterate()`
 
+#### Data
+
+* [*eo1.xml*](data_samples/eo1.xml): Sample data: First book of Aleksandr Puškin’s *Eugene Onegin*, in Russian; see the [Progress report](progress_report.md#about-the-corpus) for a description of the data source)
 
 #### Development
 
