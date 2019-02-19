@@ -1,4 +1,4 @@
 nose
 codecov
 coverage
-regex
+regex==2019.02.07
