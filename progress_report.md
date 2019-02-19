@@ -77,6 +77,7 @@ The disadvantage of working only with the *EO* subcorpus is that any modeling wi
 	* With coverage
 	* Parameterizing tests with `for` loops
 * Configuring Travis CI on GitHub
+	* Pinning an earlier release after an updated dependency broke
 
 ____
 
