@@ -24,6 +24,7 @@ def test_OGO_RE():
         yield fn
 
 
+# noinspection PyProtectedMember
 def _check_OGO_RE(s):
     assert_regexp_matches(s, cyr2phon._OGO_RE)
 
@@ -45,6 +46,7 @@ def test_lexical_data_members():
         yield fn
 
 
+# noinspection PyProtectedMember
 def check_lexical_data_members(item):
     assert_in(re.compile(item), cyr2phon._LEXICAL_DICT.keys())
 
@@ -165,6 +167,7 @@ def test_palatalize_front_vowel():
         yield fn
 
 
+# noinspection PyProtectedMember
 def check_palatalize_front_vowel(v):
     assert_equal(cyr2phon._palatalize("б" + v), "Б" + v)
 
@@ -176,6 +179,7 @@ def test_palatalize_all_back_vowel():
         yield fn
 
 
+# noinspection PyProtectedMember
 def check_palatalize_back_vowel(v):
     assert_equal(cyr2phon._palatalize("б" + v), "б" + v)
 
