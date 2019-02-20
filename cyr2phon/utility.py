@@ -64,4 +64,4 @@ def syllabify(word):
                 skip = 1  # we worked ahead, so skip the next item in the loop
             else:  # must be a consonant after the vowel, and not VLC
                 syllables.append(word[i] + '-')
-    return "".join(syllables)
+    return [syllable for syllable in "".join(syllables).split('-')]

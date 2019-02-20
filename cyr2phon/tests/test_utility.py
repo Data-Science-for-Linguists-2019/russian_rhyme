@@ -15,4 +15,4 @@ def test_syllabify_word():
 
 
 def check_syllabify_word(word):
-    assert_equal(syllabify(word), words_to_syllabify[word])
+    assert_equal(syllabify(word), [syllable for syllable in words_to_syllabify[word].split("-")])
