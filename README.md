@@ -10,22 +10,22 @@ David J. Birnbaum
 
 ### Code
 
-#### Product
+#### Notebook
+
+* [Progress report 1 notebook](progress_report_1.ipynb)
+
+#### Library
 
 * [*cyr2phon*](cyr2phon/cyr2phon.py): Cyrillic to phonetic library; exposes `cyr2phon.transliterate()`
-
-#### Data (sample)
-
-* [*eo1.xml*](data_samples/eo1.xml): First book of Aleksandr Puškin’s *Eugene Onegin*; see the [Progress report](progress_report.md#about-the-corpus) for a description of the data source
 
 #### Development
 
 * [*test_transliterate*](cyr2phon/tests/test_transliterate.py): Nose tests for [_cyr2phon_](cyr2phon/cyr2phon.py)
 * [*.travis.yml*](.travis.yml) and [*requirements.txt*](requirements.txt): Configuration information for [Travis CI](https://docs.travis-ci.com/user/tutorial/)
 
-### Data
+### Data (sample)
 
-**[To be added]**
+* [*eo1.xml*](data_samples/eo1.xml): First book of Aleksandr Puškin’s *Eugene Onegin*; see the [Progress report](progress_report.md#about-the-corpus) for a description of the data source
 
 ### Documentation
 
