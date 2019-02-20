@@ -295,3 +295,8 @@ def test_transliterate_line():
     expected = "naBiRigU pustInix vOln"
     assert_equal(cyr2phon.transliterate("<line>На берег<stress>у</stress> пуст<stress>ы</stress>нных "
                                         "в<stress>о</stress>лн</line>"), expected)
+
+def test_tranliterate_latin():
+    expected = "fkantsi PiSma pastaViT vAli"
+    assert_equal(cyr2phon.transliterate('<line lineNo="006">В конце письма поставить '
+                                        'v<stress>а</stress>le, </line>'), expected)

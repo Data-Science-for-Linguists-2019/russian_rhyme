@@ -36,8 +36,8 @@ import functools
 <line> root, balanced <stress>, no other markup
 """
 # TODO: allow attributes on <line>
-_XML_RE = re.compile(r"<line>(<stress>[аэыоуАЭЫОУяеиёюЯЕИЁЮ]</stress>|[^<>]+)+</line>")
-_PUNC_RE = re.compile(r'(?V1)[\p{P}\p{S}--[-]]')  # strip all punc except hyphen
+_XML_RE = re.compile(r"<line[^>]*?>(<stress>[аэыоуАЭЫОУяеиёюЯЕИЁЮaeiouAEIOU]</stress>|[^<>]+)+</line>")
+_PUNC_RE = re.compile(r'(?V1)[\p{P}\p{S}--[-<>/]]')  # strip all punc except hyphen and tags
 
 """constants for _lexical()"""
 _lexical_data = json.loads(
