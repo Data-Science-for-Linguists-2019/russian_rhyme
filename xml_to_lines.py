@@ -8,6 +8,7 @@ Documentation at https://www.balisage.net/Proceedings/vol21/html/Birnbaum01/Bali
 
 from xml.dom import pulldom
 from xml.dom.minidom import Document
+import numpy as np
 import pandas as pd
 import regex as re
 
