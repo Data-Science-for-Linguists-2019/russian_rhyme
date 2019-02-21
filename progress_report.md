@@ -62,10 +62,13 @@ I will start with Puškin’s *Eugene Onegin* (*EO*) because it is a long work w
 
 The disadvantage of working only with the *EO* subcorpus is that any modeling will be not of Russian rhyme in general, but of Puškin’s rhyme, and specifically of his rhyme in *EO*. Furthermore, although Puškin’s rhyming, and his poetic craft in general, is universally regarded as virtuosic, rhyme patterns of the Golden Age were stricter than those of later periods, and, in particular, stricter than those of the innovative and experimental *Silver Age of Russian literature* (roughly the first third of the twentieth century, characterized by such literary movements as Symbolism, Futurism, and Acmeism). This means that Puškin’s oeuvre is likely to be less rich in approximate rhyme—which is our eventual principal object of study—than later poetry. On the other hand, the relative strictness of Puškin’s rhyming practice means that we can develop and test our methods with this simpler dataset before attempting to apply those methods to data that is more varied in its use of rhyme.
 
+### Link to notebooks
 
-* Links to notebooks
-* Links to data samples
+* [Progress report 1 notebook](https://github.com/Data-Science-for-Linguists-2019/russian_rhyme/blob/master/progress_report_1.ipynb) 
 
+### Link to data samples
+
+* [eo1.xml](eo1.xml): First book of Aleksandr Puškin’s *Eugene Onegin*
 
 ### What I learned (or relearned)
 
