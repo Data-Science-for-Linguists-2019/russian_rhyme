@@ -59,7 +59,8 @@ _PROCLITICS = {"а", "без", "безо", "благодаря", "близ", "в
                "предо", "при", "про", "с", "сквозь", "скрозь", "со", "среди", "средь", "у", "через", "чрез"}
 
 """constant for _enclitics()"""
-_ENCLITICS = {"бо", "бы", "же", "ли"}
+# FIXME: pronouns may be proclitic or enclitic; need more nuanced handling
+_ENCLITICS = {"бо", "бы", "же", "ли", "я", "ты", "он", "мы", "вы"}
 
 """constant for _tsa()"""
 _TSA_RE = re.compile(r'ться\b')  # reflexive
