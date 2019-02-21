@@ -20,7 +20,8 @@ David J. Birnbaum
 
 #### Development
 
-* [*test_transliterate*](cyr2phon/tests/test_transliterate.py): Nose tests for [_cyr2phon_](cyr2phon/cyr2phon.py)
+* [*test_transliterate*](cyr2phon/tests/test_transliterate.py): Nose tests for [transliteration code](cyr2phon/cyr2phon.py)
+* [*test_utility*](cyr2phon/tests/test_utility.py): Nose tests for [utility code](cyr2phon/utility.py) (syllabification)
 * [*.travis.yml*](.travis.yml) and [*requirements.txt*](requirements.txt): Configuration information for [Travis CI](https://docs.travis-ci.com/user/tutorial/)
 
 ### Data (sample)
