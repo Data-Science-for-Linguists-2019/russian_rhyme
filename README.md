@@ -16,7 +16,8 @@ David J. Birnbaum
 
 #### Library
 
-* [*cyr2phon*](cyr2phon/cyr2phon.py): Cyrillic to phonetic library; exposes `cyr2phon.transliterate()`
+* [*cyr2phon.py*](cyr2phon/cyr2phon.py): Cyrillic to phonetic library; exposes `cyr2phon.transliterate()`
+* [*utility.py*](cyr2phon/utility.py): Utility functions; exposes `utility.syllabify()`
 
 #### Development
 
