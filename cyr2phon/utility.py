@@ -7,7 +7,7 @@ import itertools  # use itertools.chain(*nested_list) to flatten nested list
 # constants for syllabify() and _any_vowel
 _VOWEL = "aeiouAEIOU"  # V
 _SONORANT = "lrmnLRMNJ"  # S
-_OBSTRUENT = "bvgdžzkpstfxɣčšBVGDŽǮZKPSTFXČŠ"  # O
+_OBSTRUENT = "bvgdžzkpstfxɣčšBVGDŽǮZKPQSTFXČŠ"  # O
 _CONSONANT = _SONORANT + _OBSTRUENT  # C
 
 # constants for strip_onset()
