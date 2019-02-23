@@ -105,6 +105,21 @@ def test_lexical_zdrav_context():
     assert_equal(cyr2phon._lexical("Ах здрАвствуй дрУг"), expected)
 
 
+def test_lexical_prazdnik():
+    expected ="прАзник"
+    assert_equal(cyr2phon._lexical("прАздник"), expected)
+
+
+def test_lexical_pozdnjaja():
+    expected ="пОзний"
+    assert_equal(cyr2phon._lexical("пОздний"), expected)
+
+
+def test_lexical_prazdnikov():
+    expected="прАзников"
+    assert_equal(cyr2phon._lexical("прАздников"), expected)
+
+
 def test_lexical_multiple():
     expected = "здрАствуйте от нАшего грУсного дрУга"
     assert_equal(cyr2phon._lexical("здрАвствуйте от нАшего грУстного дрУга"), expected)
