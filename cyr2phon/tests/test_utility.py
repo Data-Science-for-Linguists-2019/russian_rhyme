@@ -20,9 +20,14 @@ def check_syllabify_word(word):
 
 
 #tests for strip_onset()
-def test_strip_onset_bA(): # open masculine with onset
+def test_strip_onset_bA(): # open masculine with onset singular
     expected = ['BA']
     assert_equal(strip_onset(['BA']), expected)
+
+
+def test_strip_onset_sna(): # open masculine with onset cluster
+    expected = ['nA']
+    assert_equal(strip_onset(['snA']), expected)
 
 
 def test_strip_onset_proch(): # closed masculine with onset

@@ -13,6 +13,7 @@ _CONSONANT = _SONORANT + _OBSTRUENT  # C
 # constants for strip_onset()
 _OPEN_PAT = re.compile(r'^.*[AEIOU]$')
 _ONSET_PAT = re.compile(r'^.*(?=[AEIOU])')
+_KEEP_FIRST = re.compile(r'.*?(.?[AEIOU])$') # keep final vowel plus optional first preceding consonant
 
 
 def _any_vowel(remaining):
@@ -86,6 +87,6 @@ def strip_onset(l: list) -> list:
         list: list of syllables with onset consonant stripped from first (stressed) one
     """
     if len(l) == 1 and _OPEN_PAT.match(l[0]):  # open masculine rhyme; keep supporting C
-        return l
+        return [_KEEP_FIRST.sub(r'\1', l[0])]
     else:  # otherwise trim pretonic C
         return list(itertools.chain(*[[_ONSET_PAT.sub("", l[0])], [item for item in l[1:]]]))  # flatten nested lists
