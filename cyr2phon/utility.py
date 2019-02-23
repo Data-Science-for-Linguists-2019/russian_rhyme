@@ -1,10 +1,18 @@
 """Utility functions for Russian rhyme analysis
 
 """
+import regex as re
+import itertools  # use itertools.chain(*nested_list) to flatten nested list
+
+# constants for syllabify() and _any_vowel
 _VOWEL = "aeiouAEIOU"  # V
 _SONORANT = "lrmnLRMNJ"  # S
 _OBSTRUENT = "bvgdžzkpstfxɣčšBVGDŽǮZKPSTFXČŠ"  # O
 _CONSONANT = _SONORANT + _OBSTRUENT  # C
+
+# constants for strip_onset()
+_OPEN_PAT = re.compile(r'^.*[AEIOU]$')
+_ONSET_PAT = re.compile(r'^.*(?=[AEIOU])')
 
 
 def _any_vowel(remaining):
@@ -65,3 +73,19 @@ def syllabify(word):
             else:  # must be a consonant after the vowel, and not VLC
                 syllables.append(word[i] + '-')
     return [syllable for syllable in "".join(syllables).split('-')]
+
+
+def strip_onset(l: list) -> list:
+    """
+    Strip onset characters before stressed vowel
+
+    Parameter:
+        l (list): list of syllables
+
+    Returns:
+        list: list of syllables with onset consonant stripped from first (stressed) one
+    """
+    if len(l) == 1 and _OPEN_PAT.match(l[0]):  # open masculine rhyme; keep supporting C
+        return l
+    else:  # otherwise trim pretonic C
+        return list(itertools.chain(*[[_ONSET_PAT.sub("", l[0])], [item for item in l[1:]]]))  # flatten nested lists
