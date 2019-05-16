@@ -22,7 +22,7 @@ David J. Birnbaum
 #### Development
 
 * [*test_transliterate*](dev/cyr2phon/tests/test_transliterate.py): Nose tests for [transliteration code](dev/cyr2phon/cyr2phon.py)
-* [*test_utility*](dev/cyr2phon/tests/test_utility.py): Nose tests for [utility code](cyr2phon/utility.py) (syllabification)
+* [*test_utility*](dev/cyr2phon/tests/test_utility.py): Nose tests for [utility code](dev/cyr2phon/utility.py) (syllabification)
 * [*.travis.yml*](.travis.yml) and [*requirements.txt*](requirements.txt): Configuration information for [Travis CI](https://docs.travis-ci.com/user/tutorial/)
 
 ### Data (sample)
@@ -33,6 +33,7 @@ David J. Birnbaum
 
 * [*project_plan.md*](docs/project_plan.md): Original project proposal
 * [*degrees-of-rhyme.md*](docs/degrees-of-rhyme.md): Examples or types of imperfect rhyme, with discussion
+* [*cluster-matching.md*](docs/cluster-matching.md): Discussion of challenges in aligning heterosegmental consonant clusters
 * [*progress_report.md*](docs/progress_report.md): Progress report (last updated 2019-02-17)
 
 ____
