@@ -12,7 +12,7 @@ David J. Birnbaum
 
 #### Notebook
 
-* [Progress report 1 notebook](notebooks/progress_report_1.ipynb)
+* [Progress report 1 notebook](dev/progress_report_1.ipynb)
 
 #### Library
 
