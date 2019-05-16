@@ -6,7 +6,7 @@ Last revised 2019-02-17
 
 ### Summary
 
-Most progress to date has involved implementing a [Python library](../cyr2phon/cyr2phon.py) to convert Russian orthography to a phonetic representation that can be used to evaluate the phonetic similarity between line endings, which is one of the principal components of rhyme. The library exposes a single `transliterate()` function that transforms the Cyrillic input (see below for details about the structure) into a custom phonetic output (not yet documented!) that is easily parsed for subsequent phonetic analysis (decomposition into syllables, syllable parts [onset, nucleus, code], segments, phonetic features—not yet implemented). For ease in creation, testing, debugging, and maintenance, the `transliterate()` function is constructed as a pipeline of sixteen private functions that can be tested individually.
+Most progress to date has involved implementing a [Python library](../dev/cyr2phon/cyr2phon.py) to convert Russian orthography to a phonetic representation that can be used to evaluate the phonetic similarity between line endings, which is one of the principal components of rhyme. The library exposes a single `transliterate()` function that transforms the Cyrillic input (see below for details about the structure) into a custom phonetic output (not yet documented!) that is easily parsed for subsequent phonetic analysis (decomposition into syllables, syllable parts [onset, nucleus, code], segments, phonetic features—not yet implemented). For ease in creation, testing, debugging, and maintenance, the `transliterate()` function is constructed as a pipeline of sixteen private functions that can be tested individually.
 
 My Russian poetry input is in normal Russian orthography with light XML
 markup. Specifically, poems are tagged as `<poem>`, stanzas are tagged as `<stanza>`, and lines are tagged as `<line>`. At the moment the corpus tags only the last stressed vowel in each line (as `<stress>`), which is the only one that matters for rhyme. There will be metadata included in each poem, but I have not yet decided on the markup for that. 
@@ -68,7 +68,7 @@ The disadvantage of working only with the *EO* subcorpus is that any modeling wi
 
 ### Link to data samples
 
-* [eo1.xml](../data_samples/eo1.xml): First book of Aleksandr Puškin’s *Eugene Onegin*
+* [eo1.xml](../dev/data_samples/eo1.xml): First book of Aleksandr Puškin’s *Eugene Onegin*
 
 ### What I learned (or relearned)
 
