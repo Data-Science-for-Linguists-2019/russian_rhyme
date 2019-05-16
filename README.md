@@ -16,18 +16,18 @@ David J. Birnbaum
 
 #### Library
 
-* [*cyr2phon.py*](cyr2phon/cyr2phon.py): Cyrillic to phonetic library; exposes `cyr2phon.transliterate()`
-* [*utility.py*](cyr2phon/utility.py): Utility functions; exposes `utility.syllabify()`
+* [*cyr2phon.py*](dev/cyr2phon/cyr2phon.py): Cyrillic to phonetic library; exposes `cyr2phon.transliterate()`
+* [*utility.py*](dev/cyr2phon/utility.py): Utility functions; exposes `utility.syllabify()`
 
 #### Development
 
-* [*test_transliterate*](cyr2phon/tests/test_transliterate.py): Nose tests for [transliteration code](cyr2phon/cyr2phon.py)
-* [*test_utility*](cyr2phon/tests/test_utility.py): Nose tests for [utility code](cyr2phon/utility.py) (syllabification)
+* [*test_transliterate*](dev/cyr2phon/tests/test_transliterate.py): Nose tests for [transliteration code](dev/cyr2phon/cyr2phon.py)
+* [*test_utility*](dev/cyr2phon/tests/test_utility.py): Nose tests for [utility code](cyr2phon/utility.py) (syllabification)
 * [*.travis.yml*](.travis.yml) and [*requirements.txt*](requirements.txt): Configuration information for [Travis CI](https://docs.travis-ci.com/user/tutorial/)
 
 ### Data (sample)
 
-* [*eo1.xml*](data_samples/eo1.xml): First book of Aleksandr Puškin’s *Eugene Onegin*; see the [Progress report](docs/progress_report.md#about-the-corpus) for a description of the data source
+* [*eo1.xml*](dev/data_samples/eo1.xml): First book of Aleksandr Puškin’s *Eugene Onegin*; see the [Progress report](docs/progress_report.md#about-the-corpus) for a description of the data source
 
 ### Documentation
 
