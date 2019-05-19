@@ -157,6 +157,11 @@ def test_proclitics_ne_s_mamoj():
     assert_equal(cyr2phon._proclitics("что не с мамой"), expected)
 
 
+def test_proclitics_so_ldom():
+    expected = "сосна садится вванну сОльдом,"
+    assert_equal(cyr2phon._proclitics("со сна садится в ванну сО льдом,"), expected)
+
+    
 # _enclitics()
 def test_enclitics_mog_by():
     expected = "мОгбы"
