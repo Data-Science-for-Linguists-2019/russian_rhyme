@@ -12,6 +12,9 @@ David J. Birnbaum
 
 #### Notebook
 
+* [Progress report 3 notebook](dev/progress_report_3.ipynb)
+* [Syllable decomposition scratchpad](dev/syllable-decomposition.ipynb)
+* [Progress report 2 notebook](dev/progress_report_2.ipynb)
 * [Progress report 1 notebook](dev/progress_report_1.ipynb)
 
 #### Library
@@ -35,6 +38,7 @@ David J. Birnbaum
 * [*degrees-of-rhyme.md*](docs/degrees-of-rhyme.md): Examples or types of imperfect rhyme, with discussion
 * [*cluster-matching.md*](docs/cluster-matching.md): Discussion of challenges in aligning heterosegmental consonant clusters
 * [*progress_report.md*](docs/progress_report.md): Progress report (last updated 2019-02-17)
+* [*bibliography.md*](docs/bibliography.md): Annotated bibliography
 
 ____
 
