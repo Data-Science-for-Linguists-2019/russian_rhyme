@@ -10,12 +10,12 @@ David J. Birnbaum
 
 ### Code
 
-#### Notebook
+#### Notebooks
 
-* [Progress report 3 notebook](dev/progress_report_3.ipynb)
-* [Syllable decomposition scratchpad](dev/syllable-decomposition.ipynb)
-* [Progress report 2 notebook](dev/progress_report_2.ipynb)
-* [Progress report 1 notebook](dev/progress_report_1.ipynb)
+* [Progress report 3 notebook](dev/progress_report_3.ipynb): decomposition into C(C) ~ V (replaces decomposition into syllable parts)
+* [Syllable decomposition scratchpad](dev/syllable-decomposition.ipynb): scratch space for decomposition into syllables and into C(C) ~ V
+* [Progress report 2 notebook](dev/progress_report_2.ipynb): decomposition into syllable parts (abandoned)
+* [Progress report 1 notebook](dev/progress_report_1.ipynb): data preparation, syllabification
 
 #### Library
 
@@ -29,7 +29,7 @@ David J. Birnbaum
 * [*.travis.yml*](.travis.yml) and [*requirements.txt*](requirements.txt): Configuration information for [Travis CI](https://docs.travis-ci.com/user/tutorial/)
 
 ### Data (sample)
-
+	
 * [*eo1.xml*](dev/data_samples/eo1.xml): First book of Aleksandr Puškin’s *Eugene Onegin*; see the [Progress report](docs/progress_report.md#about-the-corpus) for a description of the data source
 
 ### Documentation
