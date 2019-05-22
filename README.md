@@ -12,7 +12,8 @@ David J. Birnbaum
 
 #### Notebooks
 
-* [Progress report 4 notebook](dev/progress_report_4.ipynb): at last some machine learning!
+* [Samples notebook](dev/samples.ipynb): dendrogram visualization of sample poems with different properties to explore behavior
+* [Progress report 4 notebook](dev/progress_report_4.ipynb): at last some machine learning (clustering)!
 * [Progress report 3 notebook](dev/progress_report_3.ipynb): decomposition into C(C) ~ V (replaces decomposition into syllable parts)
 * [Syllable decomposition scratchpad](dev/syllable-decomposition.ipynb): scratch space for decomposition into syllables and into C(C) ~ V
 * [Progress report 2 notebook](dev/progress_report_2.ipynb): decomposition into syllable parts (abandoned)
