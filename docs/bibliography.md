@@ -197,3 +197,34 @@ Abstract in *Proceedings of the Digital Humanities, 2010*, 1–5, <http://dh2010
 
 Interactive SVG display of overlapping structural (stanzas, lines, etc.), discourse (speeches), and linguistic (clauses, sentences). 
 
+____
+
+## To check
+
+### Anon. 2018 “Dynamically scoring rhymes wiht phonetic features and sequence alignment.”
+
+<http://axon.cs.byu.edu/Dan/673/papers/bay.pdf> or download link at <https://www.semanticscholar.org/paper/Dynamically-Scoring-Rhymes-with-Phonetic-Features/213eb563257ce26f2463dcf16bbdddff7ddfa339>.
+
+### Hinton, Erik and Joel Eastwood. 2016. “Playing with Pop Culture: Writing an Algorithm To Analyze and Visualize Lyrics From the Musical ‘Hamilton’.”
+
+*Computation + journalism 2016*, Sept. 30–Oct. 1, 2016, not paginated. Download link at <https://www.semanticscholar.org/paper/Playing-with-Pop-Culture-%3A-Writing-an-Algorithm-To-Hinton/8ba81332ebe634f2201eed39cec9206c2118cc38>.
+
+### Hirjee, Hussein and Daniel G. Brown. 2009. “Automatic detection of internal and imperfect rhymes in rap lyrics.”
+
+10th International Society for Music Information Retrieval Conference (ISMIR 2009), 711–16. Download link at <https://www.semanticscholar.org/paper/Automatic-Detection-of-Internal-and-Imperfect-in-Hirjee-Brown/571c8094f19f5b1a19be41bb766ac17bdd684662>.
+
+### Hirjee, Hussein and Daniel G. Brown. 2010. “Using automated rhyme detection to characterize rhyming style in rap music.”
+
+*Empirical musicology review* Vol. 5, No. 4, 2010, 121–45. Download link at <https://www.semanticscholar.org/paper/Using-Automated-Rhyme-Detection-to-Characterize-in-Hirjee-Brown/8b66ea2b1fdc0d7df782545886930ddac0daa1de>.
+
+### McCurdy, Nina, Vivek Srikumar, and Miriah Meyer. 2015. “RhymeDesign: a tool for analyzing sonic devices in poetry.”
+
+Proceedings of NAACL-HLT Fourth Workshop on Computational Linguistics for Literature, Denver: Association for Computational Linguistics, 12–22. <https://www.aclweb.org/anthology/W15-0702>.
+
+### Tizhoosh, Hamid R., Farhang Sahba, and Rozita Dara. 2008. “Poetic features for poem recognition: a comparative study.”
+
+Journal of pattern recognition research (2008) 24-39. Download link at <https://www.researchgate.net/publication/228375375_Poetic_Features_for_Poem_Recognition_A_Comparative_Study>.
+
+### Wattenberg, Martin. 2002. “Arc diagrams: visualizing structure in strings.”
+
+*Proceedings of the IEEE Symposium on Information Visualization 2002 (InfoVis'02), unpaginated. <http://innovis.cpsc.ucalgary.ca/innovis/uploads/Courses/InformationVisualizationDetails2009/Wattenberg2002.pdf>
