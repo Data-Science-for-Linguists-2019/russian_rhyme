@@ -29,9 +29,11 @@ David J. Birnbaum
 * [*test_utility*](dev/cyr2phon/tests/test_utility.py): Nose tests for [utility code](dev/cyr2phon/utility.py) (syllabification)
 * [*.travis.yml*](.travis.yml) and [*requirements.txt*](requirements.txt): Configuration information for [Travis CI](https://docs.travis-ci.com/user/tutorial/)
 
-### Data (sample)
+### Data samples
 	
 * [*eo1.xml*](dev/data_samples/eo1.xml): First book of Aleksandr Puškin’s *Eugene Onegin*; see the [Progress report](docs/progress_report.md#about-the-corpus) for a description of the data source
+* [gippius_neljubov.xml](dev/data_samples/gippius_neljubov.xml): Zinaida Gippius, Neljubov (1907)
+* [brjusov_voron.xml](dev/data_samples/brjusov_voron.xml) Valerij Brjusov’s translation of Edgar Allan Poe’s “The raven” (1924)
 
 ### Documentation
 
