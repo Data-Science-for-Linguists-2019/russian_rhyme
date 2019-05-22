@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<poem opid="">
+    <stanza stanzaNo="001">
+        <line lineNo="001">Так просто можно жизнь покинуть <stress>э</stress>ту,</line>
+        <line lineNo="002">Бездумно и безбольно догор<stress>е</stress>ть.</line>
+        <line lineNo="003">Но не дано Российскому по<stress>э</stress>ту</line>
+        <line lineNo="004">Такою светлой смертью умер<stress>е</stress>ть.</line>
+    </stanza>
+    <stanza stanzaNo="002">
+        <line lineNo="001">Всего верней свинец душе крыл<stress>а</stress>той</line>
+        <line lineNo="002">Небесные откроет рубеж<stress>и</stress>,</line>
+        <line lineNo="003">Иль хриплый ужас лапою косм<stress>а</stress>той</line>
+        <line lineNo="004">Из сердца, как из губки, выжмет ж<stress>и</stress>знь.</line>
+    </stanza>
+</poem>
