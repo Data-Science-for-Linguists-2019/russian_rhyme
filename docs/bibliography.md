@@ -203,7 +203,7 @@ ____
 
 ### Anon. 2018 “Dynamically scoring rhymes wiht phonetic features and sequence alignment.”
 
-<http://axon.cs.byu.edu/Dan/673/papers/bay.pdf> or download link at <https://www.semanticscholar.org/paper/Dynamically-Scoring-Rhymes-with-Phonetic-Features/213eb563257ce26f2463dcf16bbdddff7ddfa339>.
+<http://axon.cs.byu.edu/Dan/673/papers/bay.pdf> or download link at <https://www.semanticscholar.org/paper/Dynamically-Scoring-Rhymes-with-Phonetic-Features/213eb563257ce26f2463dcf16bbdddff7ddfa339>. No author is indicated (!).
 
 ### Hinton, Erik and Joel Eastwood. 2016. “Playing with Pop Culture: Writing an Algorithm To Analyze and Visualize Lyrics From the Musical ‘Hamilton’.”
 
@@ -228,3 +228,5 @@ Journal of pattern recognition research (2008) 24-39. Download link at <https://
 ### Wattenberg, Martin. 2002. “Arc diagrams: visualizing structure in strings.”
 
 *Proceedings of the IEEE Symposium on Information Visualization 2002 (InfoVis'02), unpaginated. <http://innovis.cpsc.ucalgary.ca/innovis/uploads/Courses/InformationVisualizationDetails2009/Wattenberg2002.pdf>
+
+(Check also visualization links in ASEEES 2019 presentation.)
