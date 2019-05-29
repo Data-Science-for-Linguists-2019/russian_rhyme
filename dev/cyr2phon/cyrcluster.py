@@ -13,6 +13,8 @@ Public functions that render but do not return:
     visualize(filepath, ceiling=1000, ward=False)
         no return; prints text and renders dendrograms directly
 
+TODO: No tests, and the functions are not testable
+
 """
 # imports
 from xml.dom import pulldom  # parse input XML
@@ -27,7 +29,7 @@ from scipy.spatial.distance import pdist
 import matplotlib.pyplot as plt
 import seaborn as sns
 import regex as re
-from cyr2phon import cyr2phon
+import cyr2phon.cyr2phon
 
 
 # Class and variables for parsing input XML
@@ -104,7 +106,7 @@ def explore(filepath, ceiling=1000, ward=None):
         ward (boolean): show Ward dendrogram separately (improves legibility of long stanzas),
             defaults to None
 
-    TODO: document return
+    Return: df
     """
 
     # Read file
@@ -139,6 +141,18 @@ def explore(filepath, ceiling=1000, ward=None):
 
 # Analyze
 def analyze(filepath, ceiling=1000, ward=None):
+    """Return cophenetic correlation coefficients for different clustering methods and distance metrics
+
+    Parameters:
+        filepath (str): path to XML file with poem, required
+        ceiling (int): maximum number of stanzas to return (useful for sampling long poems),
+            defaults to high value
+        ward (boolean): show Ward dendrogram separately (improves legibility of long stanzas),
+            defaults to None
+
+    Return: dictionary with two keys (euclidean and cosine) and values as df of values
+    """
+
     df = explore(filepath, ceiling, ward)
     methods = {"euclidean": ["single", "complete", "average", "weighted", "centroid", "median", "ward"],
                "cosine": ["single", "complete", "average", "weighted"]}
@@ -165,6 +179,18 @@ def analyze(filepath, ceiling=1000, ward=None):
 
 # Visualize
 def visualize(filepath, ceiling=1000, ward=None):
+    """Render dendrograms of rhyme clustering
+
+    Parameters:
+        filepath (str): path to XML file with poem, required
+        ceiling (int): maximum number of stanzas to return (useful for sampling long poems),
+            defaults to high value
+        ward (boolean): show Ward dendrogram separately (improves legibility of long stanzas),
+            defaults to None
+
+    Return: No return; prints text and renders dendrograms directly
+    """
+
     df = explore(filepath, ceiling, ward)
     stanzas = df.groupby(level=[0, 1])
     i = 0
@@ -192,6 +218,19 @@ def visualize(filepath, ceiling=1000, ward=None):
     
 # Box
 def box(filepath, ceiling=1000, ward=None):
+    """Render text and dendrograms of rhyme clustering
+
+    Parameters:
+        filepath (str): path to XML file with poem, required
+        ceiling (int): maximum number of stanzas to return (useful for sampling long poems),
+            defaults to high value
+        ward (boolean): show Ward dendrogram separately (improves legibility of long stanzas),
+            defaults to None
+
+    Return: No return; renders comparative box plots of cophenetic correlation coeffieicnets of clustering methods
+        and distance metrics
+    """
+
     comparison = analyze(filepath, ceiling=1000, ward=None)
     plt.figure(figsize=(15, 4))
     for n,(id, content) in enumerate(comparison.items()):

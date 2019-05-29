@@ -7,6 +7,7 @@ __version__ = '0.1'
 
 from cyr2phon.cyr2phon import transliterate
 from cyr2phon.utility import syllabify, strip_onset
+from cyr2phon.cyrcluster import explore, analyze, visualize, box
 
 __all__ = ["transliterate", "syllabify", "strip_onset"]
 
