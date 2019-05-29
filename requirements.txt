@@ -1,3 +1,6 @@
+seaborn
+matplotlib
+scipy
 numpy
 pandas
 nose
