@@ -14,7 +14,7 @@ David J. Birnbaum
 
 (Most recent first)
 
-* [Extract and examine distances](examine_distances.ipynb): Extract distance information from clustered object and look for cut-off
+* [Extract and examine distances](dev/examine_distances.ipynb): Extract distance information from clustered object and look for cut-off
 * [Explore linkage and distance](dev/explore_linkage.ipynb): Exploration and evaluation of linkage methods and distance metrics
 * [Samples notebook](dev/samples.ipynb): dendrogram visualization of sample poems with different properties to explore behavior
 * [Progress report 4 notebook](dev/progress_report_4.ipynb): at last some machine learning (clustering)!
