@@ -124,12 +124,11 @@ def explore(filepath, ceiling=1000, ward=None):
         findall(
         r"(.?)([AEIOU])([^aeiou]*)([aeiou]?)([^aeiou]*)([aeiou]?)([^aeiou]*)([aeiou]?)([^aeiou]*)([aeiou]?)([^aeiou]*)([aeiou]?)([^aeiou]*)([aeiou]?)([^aeiou]*)([aeiou]?)([^aeiou]*)([aeiou]?)")]
     i = 0
-    while pd.np.count_nonzero([item[i] for item in df["tokenized"]]) > 0:
+    while (pd.np.count_nonzero([item[i] for item in df["tokenized"]]) > 0) or (i == 0):
         # print([item[i] for item in df["tokenized"]]) # diagnostic
         df["token" + str(i)] = [item[i] for item in df["tokenized"]]
         i += 1
     tokenheaders = df.filter(regex="^token\d").columns
-    # tokenheaders = list([item for item in df.columns if re.match(r'token\d', item)])
     df[tokenheaders] = df[tokenheaders].replace(r'^$', "missing",
                                                 regex=True)  # replace empty strings with specific value; inplace doesn't work (?)
     df.filter(regex=r"StanzaNo|LineNo|RhymeWord|Text|^token\d").head()  # columns we care about
@@ -166,7 +165,7 @@ def analyze(filepath, ceiling=1000, ward=None):
                 s_interim = pd.Series()
                 data = lines.copy().filter(regex=r"^token\d_")  # only one-hot features
                 labelList = list(range(1, len(lines) + 1))  # labels are line numbers within stanza
-                data.loc[:, "LineNo"] = [2 * n / len(labelList) for n in
+                data.loc[:, "LineNo"] = [n / (2 * len(labelList)) for n in
                                          labelList]  # scale to avoid tyranny of proximity
                 for n, m in enumerate(methods[cm]):
                     linked = linkage(data, method=m, metric=cm)
