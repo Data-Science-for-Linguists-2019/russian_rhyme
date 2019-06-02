@@ -27,6 +27,14 @@ Core methodological assumptions are, then, that:
 2. On the first pass, rhyme requires identity of all vowels in rhyme skeleton. This will fail (provisionally) to identify rhyme where post-tonic (or, exceptionally, even tonic) vowels differ, including isosyllabic and anisosyllabic examples.
 3. Stanza-level rhyme schemes are scored by frequency within the poem, and any that attains a certain score (apparently .75) is accepted, and then (perhaps; this is not explicit) projected back onto others. This may (also unclear) fail to handle poems with stanzas that have different rhyme schemes, although perhaps different schemes could be inferred for stanzas of different lengths within a poem, so that, e.g., sonnets that are lineated as 8-6 or 4-4-4-2 could have different rhyme schemes for the “stanzas” with different line counts.
 
+### Anon. 2018 “Dynamically scoring rhymes with phonetic features and sequence alignment.”
+
+<http://axon.cs.byu.edu/Dan/673/papers/bay.pdf> or download link at <https://www.semanticscholar.org/paper/Dynamically-Scoring-Rhymes-with-Phonetic-Features/213eb563257ce26f2463dcf16bbdddff7ddfa339>. No author is indicated (!), unpaginated.
+
+Feature based. Decomposition similar to ours, includes decomposing consonant clusters into phonemes and then decomposition into features (“this type of rhyme function gives better insight into why certain phonemes make better rhymes than others” §1), scoring pairs from 0 to 1. Uses dynamic programming (Needleman-Wunsch) to align consonant clusters. Refers to rhyme zone as *stress tail*. 
+
+Features are articulatory: vowels are front ~ central ~ back and consonants are place ~ manner ~ voicing. Weighting matrices *for features* for scoring purposes is determined (apparently using a hand-curated rhyme dataset, and comparing likelihood of feature pairing in rhyme against likelihood of random pairing) by aligning vowels and monophonemic consonant correspondences and then using the latter to align multiphonemic consonant clusters. Not all correspondences (or non-correspondences) are weighted equivalently, and weights may be positive or negative and may exceed 1.  Gaps in consonant alignments are identified as beginning, middle, and end. Results are amplified through genetic optimization (§2.5). Finds some neutralizations more common than others, and some corresondences are more common than others. 
+
 ### Coles, Katharine and Julie Gonnering Lein. 2013. “Finding and figuring flow: Notes toward multidimensional poetry visualization.”
 
 Conference 2013 Proceedings (pp. 444-48). <http://hdl.handle.net/2142/38940> (Listed DOI of https://doi.org/10.9776/13250 is invalid.)
@@ -150,6 +158,12 @@ FLAIRS-2016. <https://docplayer.net/27880336-Automatic-classification-of-poetry-
 
 Rhyme classification, in progress, is based on pairwise comparison of sounds. Alignment method is not described. 
 
+### Tizhoosh, Hamid R., Farhang Sahba, and Rozita Dara. 2008. “Poetic features for poem recognition: a comparative study.”
+
+Journal of pattern recognition research (2008) 24-39. Download link at <https://www.researchgate.net/publication/228375375_Poetic_Features_for_Poem_Recognition_A_Comparative_Study>.
+
+General goal is part of text classification: to distinguish poetry from prose. Explores rhyme, meter, shape, meaning. Rhyme uses CMU Moby for pronunciation, scoring according to ratio of number of matching phonemes in rhyme zone to smallest number of phonemes in the test (that is, percentage of possible correspondence achieved). Looks only at quatrains and only for AAAA, AABB, and ABAB (not, apparently, ABBA), “with each line that fits the sequence contributing its rhyme score to the total for that pattern. The document’s feature value is then the highest of these scores.” (27)
+
 ____
 
 ## Visualization, general
@@ -197,15 +211,17 @@ Abstract in *Proceedings of the Digital Humanities, 2010*, 1–5, <http://dh2010
 
 Interactive SVG display of overlapping structural (stanzas, lines, etc.), discourse (speeches), and linguistic (clauses, sentences). 
 
+### Wattenberg, Martin. 2002. “Arc diagrams: visualizing structure in strings.”
+
+*Proceedings of the IEEE Symposium on Information Visualization 2002 (InfoVis'02), unpaginated. <http://innovis.cpsc.ucalgary.ca/innovis/uploads/Courses/InformationVisualizationDetails2009/Wattenberg2002.pdf> Site with examples at <http://bewitched.com/song.html> and <http://turbulence.org/Works/song/>.  For text visualization see also his <http://bewitched.com/text-vis.html>.
+
+See <https://www.d3-graph-gallery.com/arc>. Network graph with nodes in a single row, which makes sense where the nodes are inherently ordered (e.g., music). Arcs join subsequences (not just single items), comparable to ABAB (author refers to musical sequences, rather than rhyme). Compares to dotplots, which reveal subsequences as diagonals, but don’t do well with multiply repeated multiple sequences.
+
 ____
 
 ## To check
 
-### Anon. 2018 “Dynamically scoring rhymes wiht phonetic features and sequence alignment.”
-
-<http://axon.cs.byu.edu/Dan/673/papers/bay.pdf> or download link at <https://www.semanticscholar.org/paper/Dynamically-Scoring-Rhymes-with-Phonetic-Features/213eb563257ce26f2463dcf16bbdddff7ddfa339>. No author is indicated (!).
-
-### Hinton, Erik and Joel Eastwood. 2016. “Playing with Pop Culture: Writing an Algorithm To Analyze and Visualize Lyrics From the Musical ‘Hamilton’.”
+### Hinton, Erik and Joel Eastwood. 2016. “Playing with pop culture: writing an algorithm to analyze and visualize lyrics from the musical ‘Hamilton’.”
 
 *Computation + journalism 2016*, Sept. 30–Oct. 1, 2016, not paginated. Download link at <https://www.semanticscholar.org/paper/Playing-with-Pop-Culture-%3A-Writing-an-Algorithm-To-Hinton/8ba81332ebe634f2201eed39cec9206c2118cc38>.
 
@@ -221,12 +237,7 @@ ____
 
 Proceedings of NAACL-HLT Fourth Workshop on Computational Linguistics for Literature, Denver: Association for Computational Linguistics, 12–22. <https://www.aclweb.org/anthology/W15-0702>.
 
-### Tizhoosh, Hamid R., Farhang Sahba, and Rozita Dara. 2008. “Poetic features for poem recognition: a comparative study.”
+Broad definition of rhyme, developed in consultation with poets. 
 
-Journal of pattern recognition research (2008) 24-39. Download link at <https://www.researchgate.net/publication/228375375_Poetic_Features_for_Poem_Recognition_A_Comparative_Study>.
-
-### Wattenberg, Martin. 2002. “Arc diagrams: visualizing structure in strings.”
-
-*Proceedings of the IEEE Symposium on Information Visualization 2002 (InfoVis'02), unpaginated. <http://innovis.cpsc.ucalgary.ca/innovis/uploads/Courses/InformationVisualizationDetails2009/Wattenberg2002.pdf>
 
 (Check also visualization links in ASEEES 2019 presentation.)
