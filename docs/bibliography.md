@@ -148,7 +148,7 @@ sound average where the tone in the content is continually changed.” (Noh et a
 
 FLAIRS-2016. <https://docplayer.net/27880336-Automatic-classification-of-poetry-by-meter-and-rhyme.html>
 
-Rhyme classification, in progress, is based on pairwise comparison on sound. Alignment method is not described. 
+Rhyme classification, in progress, is based on pairwise comparison of sounds. Alignment method is not described. 
 
 ____
 
