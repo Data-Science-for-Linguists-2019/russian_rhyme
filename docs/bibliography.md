@@ -108,7 +108,7 @@ In *Computational linguistics and intelligent text processing - 17th internation
 conference, CICLing 2016, Konya, Turkey, April 3-9, 2016, revised
 selected papers, part {II} pp.611-28. <https://www.researchgate.net/publication/323875384_Aoidos_A_System_for_the_Automatic_Scansion_of_Poetry_Written_in_Portuguese>
 
-Two-pass identification of meter that uses ordered rules to deal with elision, syncope, apheresis, crasis, sylaloepha. Rhyme apparently does pairwise comparisons, apparently only for exact matches, although neither of those is stated explicitly. Reuses up to last ten rhyme-scheme letters.
+Two-pass identification of meter that uses ordered rules to deal with elision, syncope, apheresis, crasis, synaloepha. Rhyme apparently does pairwise comparisons, apparently only for exact matches, although neither of those is stated explicitly. Reuses up to last ten rhyme-scheme letters.
 
 “Aoidos (Mittmann et al., 2016) is a system that analyzes rhymes in Portuguese poetry.” (Kesarwani 2018: 28)
 
