@@ -41,6 +41,14 @@ Word | 5O0 | 5O1 | 5O-1 | 5O-2
 **вы́бора** | r | | | r | 
 **вы́борка** | r | k | k | r 
 
+See also immediately below.
+
+### Consonant clusters with different order
+
+A modification of one-hot encoding would allow more than one hot value, so that, for example, a **br** cluster would have a `1` value for `b` and a `1` value for `r`. This captures the fact that such a column is partial similar to pure `b` and pure `r` values, although it loses information about relative order, which could be meaningful (e.g., **совра́ть** and **сорва́ть**). See <https://datascience.stackexchange.com/questions/14847/multiple-categorical-values-for-a-single-feature-how-to-convert-them-to-binary-u> for sample code.
+
+This would address the **вы́бора** ~ **вы́борка** example, above.
+
 ### Different syllable count
 
 Possibly in combination with the preceding, rhyming words may have a different number of post-tonic syllables, e.g., **мо́рда** *[mOr-da]* ~ **го́рода** *[gO-ra-da]*. 
