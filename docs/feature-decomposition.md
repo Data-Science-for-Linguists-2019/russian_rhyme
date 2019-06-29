@@ -96,3 +96,34 @@ Above we identify three ways to represent information about consonant clusters:
 1. The preceding approach weights all features equally. Are some features, though, more significant for identifying rhyme than others?
 1. The preceding approach treats all features as independent of one another, but some are contingent. For example, **+lateral** predetermines *all* other features except palatalization. Can we reduce overweighting due to redundancy by applying dimensionality reduction?
 1. We continue to lose, as with all methods discussed here, information about the *order* of consonants.
+
+## /j/ and palatalized consonants
+
+One common relaxation in the phonetic exactness of classicial Golden Age Russian verse is that /j/ may rhyme with any palatalized consonant, but otherwise palatalized consonsants do not automatically rhyme with one another. Thus, for example, **i ja** rhymes with **menja** (/j/ ~ /n′/), but /n′/ does not rhyme as easily with /l′/. In other words, rhyme in this situation is not transitive, so that given the premises that 1) /l′/ rhymes with /j/ and 2) /n′/ rhymes with /j/, it does not follow that /l′/ rhymes with /n′/. Rhyme involving /j/ does not observe triangular equality.
+
+Clustering methods assume that items to be clustered (rows) have features (columns), which may be considered dimensions in an n-dimensional space, and the values in the dataframe cells indicate the position of each item along a specific dimension. The available clustering methods operate on those positions independently of the positons of other items.
+
+Below are possible ways of addressing this details. These are explored further in [Palatalization, /j/, and rhyme](../dev/decompose_palatalization.ipynb).
+
+### Palatalization decomposition
+
+Contrary to traditional phonetic and phonemic practice, we can decompose palatalized consonants by breaking out the palatalization as if it were a separate /j/ consonant, that is, by representing /l′/ as if it were /lj/. Because we represent the features of consonant clusters by averaging the feature values of the constituent individual components, this decomposition averages the actual features of the consonant in question with those of /j/, effectively moving it closer to /j/, although at the expense of moving it further from its unpalatalized counterpart.
+
+Here are the differences:
+
+word | syllabic | consonantal | sonorant | anterior | coronal | palatalized | nasal | voiced | continuant | lateral | delayed
+---|---|---|---|---|---|---|---|---|---|---|---
+/ j / | 0 | 0 | 1	| 0 | 1 | 1 | 0 | 1 | 1 | 0 | 0
+/ l / | 0 | 1 | 1 | 1 | 1 | 0 | 0 | 1 |1 | 1 | 0
+/ l′ / | 0 | 1 | 1 | 1 | 1 | 1 | 0 | 1 |1 | 1 | 0
+/ lj / | 0 | 0.5 | 1 | 0.5 | 1 | 0.5 | 0| 1 | 1| 0.5| 0
+/ n / | 0 | 1 | 1 | 1 | 1 | 0 | 1| 1 |0 | 0 | 0
+/ n′ / | 0 | 1 | 1 | 1 | 1 | 1 | 1| 1 |0 | 0 | 0
+/ nj / | 0 | 0.5 | 1 | 0.5 | 1 | 0.5 | 0.5| 1 |0.5 | 0 | 0
+
+The resulting hierarchy is: ((lj, nj), j), (n, l). This correctly draws the surrogates for the palatalized consonants closer to /j/, while incorrectly drawing them closer to each other. It is correct that palatalized consonants rhyme more readily with (are closer to, in the rhyme vector space) /j/ than with their non-palatalized counterparts.
+
+### “Rhymes with X” features
+
+Instead of blending /j/ feature values with those of palatalized consonants to increase their proximty to /j/ in the vector space, we can add *rhymes with X* features for all segments, where X is all palatalized consonants. Each segment rhymes only with itself except that /j/ rhymes with all palatalized consonants. This avoids the triangular equality issue because, for example, /j/ would be close to /l′/ by sharing a `1` value on the “rhymes with /l′/” vector, and close to /n′/ by sharing a value on the “rhymes with /n′/” axis, but /l′/ and /n′/ would not share any additional features.
+
