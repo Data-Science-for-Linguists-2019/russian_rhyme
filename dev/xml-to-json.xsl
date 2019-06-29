@@ -7,7 +7,7 @@
     xpath-default-namespace="http://www.w3.org/1999/xhtml" exclude-result-prefixes="#all"
     version="3.0">
     <!-- =================================== -->
-    <!-- convert xhtml feature chart to list -->
+    <!-- convert xhtml feature chart to json -->
     <!-- =================================== -->
     <xsl:output method="json" indent="yes"/>
     <xsl:strip-space elements="*"/>
