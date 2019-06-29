@@ -7,29 +7,45 @@
     xpath-default-namespace="http://www.w3.org/1999/xhtml" exclude-result-prefixes="#all"
     version="3.0">
     <!-- =================================== -->
-    <!-- convert xhtml feature chart to json -->
+    <!-- convert xhtml feature chart to list -->
     <!-- =================================== -->
     <xsl:output method="json" indent="yes"/>
     <xsl:strip-space elements="*"/>
 
+    <xsl:variable name="c_labels" as="xs:string+" select="//table[1]/tr[1]/th"/>
+    <xsl:variable name="v_labels" as="xs:string+" select="//table[2]/tr[1]/th"/>
+
     <xsl:template match="/">
         <xsl:variable name="segments" as="map(*)*">
-            <xsl:apply-templates select="//table/tr[position() gt 1]"/>
+            <xsl:apply-templates select="//table[1]/tr[position() gt 1]" mode="c"/>
+            <xsl:apply-templates select="//table[2]/tr[position() gt 1]" mode="v"/>
         </xsl:variable>
-        <xsl:sequence select="map {'segments': array {$segments}}"/>
+        <xsl:sequence select="map:merge($segments)"/>
     </xsl:template>
 
-    <xsl:template match="tr">
-        <xsl:variable name="features" as="item()*">
-            <xsl:apply-templates select="td"/>
+    <xsl:template match="tr" mode="c">
+        <xsl:variable name="row" select="current()" as="element(tr)"/>
+        <xsl:variable name="segment" select="th" as="xs:string"/>
+        <xsl:variable name="features" as="map(*)*">
+            <xsl:for-each select="2 to count(*)">
+                <xsl:variable name="label" as="xs:string" select="$c_labels[current()]"/>
+                <xsl:variable name="value" as="xs:integer" select="$row/*[position() = current()]"/>
+                <xsl:sequence select="map:entry($label, $value)"/>
+            </xsl:for-each>
         </xsl:variable>
-        <xsl:sequence select="map {th[1]: array {$features}}"/>
+        <xsl:sequence select="map:entry($segment, map:merge($features))"/>
     </xsl:template>
 
-    <xsl:template match="td">
-        <xsl:map-entry key="../preceding-sibling::tr[last()]/th[position() eq current()/count(preceding-sibling::*) + 1]">
-            <xsl:value-of select="."/>
-        </xsl:map-entry>
+    <xsl:template match="tr" mode="v">
+        <xsl:variable name="row" select="current()" as="element(tr)"/>
+        <xsl:variable name="segment" select="th" as="xs:string"/>
+        <xsl:variable name="features" as="map(*)*">
+            <xsl:for-each select="2 to count(*)">
+                <xsl:variable name="label" as="xs:string" select="$v_labels[current()]"/>
+                <xsl:variable name="value" as="xs:integer" select="$row/*[position() = current()]"/>
+                <xsl:sequence select="map:entry($label, $value)"/>
+            </xsl:for-each>
+        </xsl:variable>
+        <xsl:sequence select="map:entry($segment, map:merge($features))"/>
     </xsl:template>
-
 </xsl:stylesheet>
