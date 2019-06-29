@@ -1,0 +1,62 @@
+{
+    "A": { 
+      "Syllabic": 1,
+      "High": 0,
+      "Back": 1,
+      "Sonorant": 1,
+      "Low": 1 },
+    "a": { 
+      "Syllabic": 1,
+      "High": 0,
+      "Back": 1,
+      "Sonorant": 1,
+      "Low": 1 },
+    "E": { 
+      "Syllabic": 1,
+      "High": 0,
+      "Back": 0,
+      "Sonorant": 1,
+      "Low": 0 },
+    "e": { 
+      "Syllabic": 1,
+      "High": 0,
+      "Back": 0,
+      "Sonorant": 1,
+      "Low": 0 },
+    "I": { 
+      "Syllabic": 1,
+      "High": 1,
+      "Back": 0,
+      "Sonorant": 1,
+      "Low": 0 },
+    "i": { 
+      "Syllabic": 1,
+      "High": 1,
+      "Back": 0,
+      "Sonorant": 1,
+      "Low": 0 },
+    "O": { 
+      "Syllabic": 1,
+      "High": 0,
+      "Back": 1,
+      "Sonorant": 1,
+      "Low": 0 },
+    "o": { 
+      "Syllabic": 1,
+      "High": 0,
+      "Back": 1,
+      "Sonorant": 1,
+      "Low": 0 },
+    "U": { 
+      "Syllabic": 1,
+      "High": 1,
+      "Back": 1,
+      "Sonorant": 1,
+      "Low": 0 },
+    "u": { 
+      "Syllabic": 1,
+      "High": 1,
+      "Back": 1,
+      "Sonorant": 1,
+      "Low": 0 }
+  }

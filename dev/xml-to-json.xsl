@@ -16,11 +16,18 @@
     <xsl:variable name="v_labels" as="xs:string+" select="//table[2]/tr[1]/th"/>
 
     <xsl:template match="/">
-        <xsl:variable name="segments" as="map(*)*">
+        <xsl:variable name="consonants" as="map(*)*">
             <xsl:apply-templates select="//table[1]/tr[position() gt 1]" mode="c"/>
+        </xsl:variable>
+        <xsl:variable name="vowels" as="map(*)*">
             <xsl:apply-templates select="//table[2]/tr[position() gt 1]" mode="v"/>
         </xsl:variable>
-        <xsl:sequence select="map:merge($segments)"/>
+        <xsl:result-document href="consonants.json">
+            <xsl:sequence select="map:merge($consonants)"/>
+        </xsl:result-document>
+        <xsl:result-document href="vowels.json">
+            <xsl:sequence select="map:merge($vowels)"/>
+        </xsl:result-document>
     </xsl:template>
 
     <xsl:template match="tr" mode="c">
