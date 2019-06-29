@@ -121,9 +121,9 @@ word | syllabic | consonantal | sonorant | anterior | coronal | palatalized | na
 / n′ / | 0 | 1 | 1 | 1 | 1 | 1 | 1| 1 |0 | 0 | 0
 / nj / | 0 | 0.5 | 1 | 0.5 | 1 | 0.5 | 0.5| 1 |0.5 | 0 | 0
 
-The resulting hierarchy is: ((lj, nj), j), (n, l). This correctly draws the surrogates for the palatalized consonants closer to /j/, while incorrectly drawing them closer to each other. It is correct that palatalized consonants rhyme more readily with (are closer to, in the rhyme vector space) /j/ than with their non-palatalized counterparts.
+The resulting hierarchy is: (((lj, nj), j), (n, l)). This correctly draws the surrogates for the palatalized consonants closer to /j/, while incorrectly drawing them closer to each other. It is correct that palatalized consonants rhyme more readily with (are closer to, in the rhyme vector space) /j/ than with their non-palatalized counterparts.
 
 ### “Rhymes with X” features
 
-Instead of blending /j/ feature values with those of palatalized consonants to increase their proximty to /j/ in the vector space, we can add *rhymes with X* features for all segments, where X is all palatalized consonants. Each segment rhymes only with itself except that /j/ rhymes with all palatalized consonants. This avoids the triangular equality issue because, for example, /j/ would be close to /l′/ by sharing a `1` value on the “rhymes with /l′/” vector, and close to /n′/ by sharing a value on the “rhymes with /n′/” axis, but /l′/ and /n′/ would not share any additional features.
+Instead of blending /j/ feature values with those of palatalized consonants to increase their proximty to /j/ in the vector space, we can add *rhymes with X* features for all segments, where X is all palatal and palatalized consonants. Each segment rhymes only with itself except that /j/ rhymes with all palatalized consonants (this is asymmetrical: the only consonant that rhymes with /j/ is /j/ itself). This avoids the triangular equality issue because, for example, /j/ would be close to /l′/ by sharing a `1` value on the “rhymes with /l′/” vector, and close to /n′/ by sharing a value on the “rhymes with /n′/” axis, but /l′/ and /n′/ would not share any additional features. Unfortunately, at least without added weighting, this one feature is not enough to tip the clustering, which emerges as (((n, n′), (l, l′)), j).
 
