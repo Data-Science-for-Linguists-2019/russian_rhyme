@@ -239,5 +239,14 @@ Proceedings of NAACL-HLT Fourth Workshop on Computational Linguistics for Litera
 
 Broad definition of rhyme, developed in consultation with poets. 
 
+### Haider, Thomas and J. Kuhn, J. 2018. “Supervised rhyme detection with Siamese recurrent networks.” 
+
+In *Proceedings of the second joint SIGHUM workshop on computational linguistics for cultural heritage, social sciences, humanities and literature*, 81–86. <https://www.aclweb.org/anthology/W18-4509/>. The corpus is published at
+<https://github.com/thomasnikolaushaider/german-rhyme-corpus>.
+
+
+### Kentner, Gerrit. 2017. “On the emergence of reduplication in German morphophonology.” 
+
+*Zeitschrift für Sprachwissenschaft*, 36(2), 233-77. <https://www.degruyter.com/downloadpdf/j/zfsw.2017.36.issue-2/zfs-2017-0010/zfs-2017-0010.pdf>. See also <https://user.uni-frankfurt.de/~kentner/>. 
 
 (Check also visualization links in ASEEES 2019 presentation.)
