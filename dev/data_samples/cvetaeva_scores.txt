@@ -1,0 +1,43 @@
+Poetry Panel, ASEEES
+Mon, November 25, 1:45 to 3:30pm, San Francisco Marriott Marquis, Floor: 5, Sierra G
+
+Cvetaeva Novogodnee (1927)
+Multiple versions, other poems by the same name
+
+
+Brodsky, Joseph. “Footnote to a poem.” In his: *Less than one - selected essays.*
+
+Toker, Leona. “Tsvetaeva's Novogodnee.” *The explicator*; Vol. 47, Iss. 1, (Fall 1988): 31–33.
+
+Feature-based clustering produces worse results, with greater distances
+Quite sparse because of both missing segments and missing features
+Overweights consonants because they have more features than vowels (this could be tweaked)
+No apparent benefit, since segment clustering is generally good	
+
+St	Seg	Fea	Flag
+1	1	1
+2	0	1
+3	0	0
+4	1	0
+5	0	0
+6	0	0
+7	1	0
+8	0	0	(German)
+9	1	1
+10	1	1
+11	0	0
+12	0	0	(Hyphen)
+13	1	0
+14	1	0	*
+15	1	0
+16	1	1
+17	1	1
+18	0	0	*
+19	0	0	*
+20	1	1
+21	1	0
+22	1	1
+23	0	0
+24	0	0
+
+	13	8
